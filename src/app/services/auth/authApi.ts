@@ -10,11 +10,15 @@ export const authApi = apiService.injectEndpoints({
                 data,
             }),
             async onQueryStarted(data, { dispatch, queryFulfilled }) {
-                const { data: resData } = await queryFulfilled
-                const { token, user } = resData
-                dispatch(signIn(token))
-                const { _id, username, email } = user
-                dispatch(setUser({ _id, username, email }))
+                try {
+                    const { data: resData } = await queryFulfilled
+                    const { token, user } = resData
+                    dispatch(signIn(token))
+                    const { _id, username, email } = user
+                    dispatch(setUser({ _id, username, email }))
+                } catch (error) {
+                    console.error(error)
+                }
             }
         })
     })
