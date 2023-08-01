@@ -4,6 +4,7 @@ import Dialog from "./Dialog";
 import MenuItem from "./MenuItem";
 import Popover from "./Popover";
 import Table from "./Table";
+import Card from './Card';
 
 export default function ComponentsOverrides(theme: Theme) {
     return Object.assign(
@@ -12,5 +13,6 @@ export default function ComponentsOverrides(theme: Theme) {
         Dialog(theme),
         Button(theme),
         Table(theme),
+        Card(theme),
     )
 }

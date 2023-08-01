@@ -19,6 +19,7 @@ const RHFTextField: React.FC<RHFTextFieldProps> = ({ name, ...props }) => {
                 <TextField
                     {...field}
                     fullWidth
+                    size="small"
                     error={!!error}
                     helperText={error?.message}
                     value={typeof field.value === 'number' && field.value === 0 ? '' : field.value}

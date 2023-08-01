@@ -6,8 +6,9 @@ const axiosBaseQuery = ({ baseUrl }: { baseUrl: string }) =>
         method: string,
         data?: object,
         params?: object
-    }) => {
+    }, { getState }: { getState: any }) => {
         try {
+            const token = getState().auth.token?.accessToken
             const result = await axiosInstance({
                 baseURL: baseUrl,
                 url,
@@ -16,6 +17,7 @@ const axiosBaseQuery = ({ baseUrl }: { baseUrl: string }) =>
                 params,
                 headers: {
                     'Accept': 'application/json',
+                    'Authorization': token,
                 }
             })
             return {
