@@ -5,6 +5,7 @@ import TodosPage from "../pages/todos";
 import LoginPage from "../pages/login";
 import AuthGuard from "../guards/AuthGuard";
 import GuestGuard from "../guards/GuestGuard";
+import RegisterPage from "../pages/register";
 
 export default function Router() {
     return useRoutes([
@@ -12,6 +13,12 @@ export default function Router() {
             path: 'login',
             element: <GuestGuard redirectTo="/">
                 <LoginPage />
+            </GuestGuard>
+        },
+        {
+            path: 'register',
+            element: <GuestGuard redirectTo="/">
+                <RegisterPage />
             </GuestGuard>
         },
         {

@@ -1,6 +1,7 @@
 import { useTranslation, Trans } from 'react-i18next'
 import React from "react";
-import { Stack, InputAdornment, IconButton, Link, Typography, Tooltip } from "@mui/material";
+import { useNavigate } from 'react-router-dom';
+import { Stack, Box, InputAdornment, IconButton, Link, Typography, Tooltip } from "@mui/material";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useForm } from "react-hook-form";
@@ -15,8 +16,12 @@ import { showErrors } from '../../../utils/validations/validationHelper';
 
 const FORM_ID = 'login-form'
 
-const LoginForm: React.FC = () => {
-    const { t } = useTranslation('translations', { keyPrefix: 'login' })
+type Props = {
+    t: any
+}
+
+const LoginForm: React.FC<Props> = ({ t }) => {
+    const navigate = useNavigate()
     const { toggle: show, onToggle } = useToggle()
 
     return (
@@ -25,11 +30,14 @@ const LoginForm: React.FC = () => {
                 <Trans
                     defaults={t('noAccount', { action: t('createAccount') })}
                     components={{
-                        custom: <span style={{
-                            color: '#00ab55',
-                            cursor: 'pointer',
-                            fontWeight: 'bold',
-                        }} />
+                        custom: <Box component='span'
+                            onClick={() => navigate('/register')}
+                            sx={{
+                                color: '#00ab55',
+                                cursor: 'pointer',
+                                fontWeight: 'bold',
+                            }}
+                        />
                     }}
                 />
             </Typography>
@@ -62,17 +70,18 @@ const LoginForm: React.FC = () => {
 }
 
 const LoginFormContainer: React.FC = () => {
+    const { t } = useTranslation('translations', { keyPrefix: 'login' })
+
     const defaultValues = {
         username: '',
         password: '',
     }
     const methods = useForm({
-        resolver: yupResolver(LoginSchema()),
+        resolver: yupResolver(LoginSchema(t)),
         defaultValues,
         mode: 'onSubmit',
     })
     const { handleSubmit, setError, formState: { errors } } = methods
-    console.log('errors: ', errors)
 
     const handleLogin = async (data: any) => {
         try {
@@ -96,7 +105,7 @@ const LoginFormContainer: React.FC = () => {
         methods={methods}
         onSubmit={handleSubmit(handleLogin)}
     >
-        <LoginForm />
+        <LoginForm t={t} />
     </FormProvider>
 }
 
