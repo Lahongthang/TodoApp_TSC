@@ -1,30 +1,31 @@
 import { Trans } from 'react-i18next'
 import React from "react";
 import { useNavigate } from 'react-router-dom';
-import { Stack, Box, InputAdornment, IconButton, Link, Typography, Tooltip, FormGroup, FormControlLabel, Checkbox } from "@mui/material";
+import { Stack, Box, InputAdornment, Tooltip, IconButton, Typography } from '@mui/material'
+import { LoadingButton } from '@mui/lab';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import { useToggle } from "../../../hooks";
 import { RHFTextField } from "../../../components/hook-form";
-import { LoadingButton } from "@mui/lab";
+import { useToggle } from '../../../hooks';
 
 type Props = {
     t: any
 }
 
-const LoginForm: React.FC<Props> = ({ t }) => {
+const RegisterForm: React.FC<Props> = ({ t }) => {
     const navigate = useNavigate()
-    const { toggle: showPass, onToggle: onToggleShowPass } = useToggle()
-    const { toggle: remember, onToggle: onToggleRemember } = useToggle()
+
+    const { toggle: showPass, onToggle: onTogglePass } = useToggle()
+    const { toggle: showConfirmPass, onToggle: onToggleConfirmPass } = useToggle()
 
     return (
         <Stack spacing={3}>
             <Typography variant='body2'>
                 <Trans
-                    defaults={t('noAccount', { action: t('createAccount') })}
+                    defaults={t('haveAccount', { action: t('signIn') })}
                     components={{
                         custom: <Box component='span'
-                            onClick={() => navigate('/register')}
+                            onClick={() => navigate('/login')}
                             sx={{
                                 color: '#00ab55',
                                 cursor: 'pointer',
@@ -39,37 +40,42 @@ const LoginForm: React.FC<Props> = ({ t }) => {
                 label={t('form.username')}
             />
             <RHFTextField
+                name="email"
+                label={t('form.email')}
+            />
+            <RHFTextField
                 name="password"
                 label={t('form.password')}
                 type={showPass ? 'text' : 'password'}
                 InputProps={{
                     endAdornment: <InputAdornment position="end">
                         <Tooltip title={t(`form.${showPass ? 'hidePassword' : 'showPassword'}`)} placement='top'>
-                            <IconButton size='small' onClick={onToggleShowPass}>
+                            <IconButton size='small' onClick={onTogglePass}>
                                 {showPass ? <VisibilityOffIcon /> : <VisibilityIcon />}
                             </IconButton>
                         </Tooltip>
                     </InputAdornment>
                 }}
             />
-            <FormGroup>
-                <FormControlLabel
-                    control={<Checkbox
-                        size='small'
-                        checked={remember}
-                        onChange={onToggleRemember}
-                    />}
-                    label={<Typography variant='body2'>{t('form.remember')}</Typography>}
-                />
-            </FormGroup>
-            <Link href="" variant="body2" alignSelf='flex-end'>
-                {t('form.forgotPassword')}
-            </Link>
+            <RHFTextField
+                name="confirmPassword"
+                label={t('form.confirmPassword')}
+                type={showConfirmPass ? 'text' : 'password'}
+                InputProps={{
+                    endAdornment: <InputAdornment position="end">
+                        <Tooltip title={t(`form.${showConfirmPass ? 'hidePassword' : 'showPassword'}`)} placement='top'>
+                            <IconButton size='small' onClick={onToggleConfirmPass}>
+                                {showConfirmPass ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                            </IconButton>
+                        </Tooltip>
+                    </InputAdornment>
+                }}
+            />
             <LoadingButton size='small' type="submit" variant="contained">
-                {t('form.loginBtn')}
+                {t('form.registerBtn')}
             </LoadingButton>
         </Stack>
     )
 }
 
-export default LoginForm;
+export default RegisterForm;

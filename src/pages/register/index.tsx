@@ -2,10 +2,10 @@ import { useTranslation } from 'react-i18next'
 import React from "react";
 import { Container, Card, Typography, Stack } from '@mui/material'
 import Page from "../../components/Page";
-import LoginContainer from '../../features/auth/login';
+import RegisterConttainer from '../../features/auth/register';
 
-const LoginPage: React.FC = () => {
-    const { t } = useTranslation('translations', { keyPrefix: 'login' })
+const RegisterPage: React.FC = () => {
+    const { t } = useTranslation('translations', { keyPrefix: 'register' })
     return (
         <Page title={t('title')} sx={{ height: 1 }}>
             <Container maxWidth='sm' sx={{ height: 1 }}>
@@ -14,7 +14,7 @@ const LoginPage: React.FC = () => {
                         <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
                             {t('title')}
                         </Typography>
-                        <LoginContainer />
+                        <RegisterConttainer />
                     </Stack>
                 </Card>
             </Container>
@@ -22,4 +22,4 @@ const LoginPage: React.FC = () => {
     )
 }
 
-export default LoginPage;
+export default RegisterPage;

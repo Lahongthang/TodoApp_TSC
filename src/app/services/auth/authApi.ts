@@ -20,6 +20,13 @@ export const authApi = apiService.injectEndpoints({
                     console.error(error)
                 }
             }
-        })
+        }),
+        register: builder.mutation({
+            query: (data) => ({
+                url: 'register',
+                method: 'POST',
+                data,
+            })
+        }),
     })
 })

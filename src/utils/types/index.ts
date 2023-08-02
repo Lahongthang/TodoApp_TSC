@@ -21,3 +21,10 @@ type User = {
     username: string,
     email: string,
 }
+
+// snackbar
+export type Snackbar = {
+    HIDE_DURATION: number,
+    ANCHOR_VERTICAL: "top" | "bottom",
+    ANCHOR_HORIZONTAL: "center" | "left" | "right",
+}

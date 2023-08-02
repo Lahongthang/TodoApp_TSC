@@ -4,6 +4,7 @@ import Router from './routes';
 import ThemeProvider from './theme';
 import { getLocaleDateFns } from './configs/lang';
 import { useLocales } from './hooks';
+import NotiStackProvider from './components/NotiStackProvider';
 
 const App = () => {
   const { currentLang } = useLocales()
@@ -12,7 +13,9 @@ const App = () => {
   return (
     <LocalizationProvider adapterLocale={localeDateFns} dateAdapter={AdapterDateFns}>
       <ThemeProvider>
-        <Router />
+        <NotiStackProvider>
+          <Router />
+        </NotiStackProvider>
       </ThemeProvider>
     </LocalizationProvider>
   );
