@@ -34,10 +34,10 @@ const RegisterConttainer: React.FC = () => {
         const bodyData = (({confirmPassword, ...rest}) => rest)(data)
         try {
             await dispatch(authApi.endpoints.register.initiate(bodyData)).unwrap()
-            enqueueSnackbar(t('notifications.successed'))
+            enqueueSnackbar(t('notifications.registerSuccessed'))
             navigate('/login')
         } catch (error) {
-            enqueueSnackbar(t('notifications.failed'), { variant: 'error' })
+            enqueueSnackbar(t('notifications.registerFailed'), { variant: 'error' })
             showRegisterError(error)
         }
     }

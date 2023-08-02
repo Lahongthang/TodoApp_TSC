@@ -23,8 +23,10 @@ const en = {
             }
         },
         notifications: {
-            successed: 'Login successfully!',
-            failed: 'Login failed!'
+            loginSuccessed: 'Login successfully!',
+            loginFailed: 'Login failed!',
+            logoutSuccessed: 'Logout successfully!',
+            logoutFailed: 'Logout failed!',
         }
     },
     register: {
@@ -59,8 +61,8 @@ const en = {
             },
         },
         notifications: {
-            successed: 'Create account successfully!',
-            failed: 'Create account failed!'
+            registerSuccessed: 'Create account successfully!',
+            registerFailed: 'Create account failed!'
         }
     }
 }

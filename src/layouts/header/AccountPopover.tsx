@@ -1,18 +1,28 @@
 import React, { useState } from 'react'
 import { IconButton, Popover, Box, Typography, Divider, MenuItem } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useSnackbar } from 'notistack'
 import MyAvatar from '../../components/MyAvatar';
 import { dispatch, useSelector } from '../../app/store';
 import { AuthState } from '../../utils/types';
 import { selectCurrUser, signOut } from '../../app/redux/auth/authSlice';
+import { useTranslation } from 'react-i18next';
 
 const AccountPopover: React.FC = () => {
+    const { t } = useTranslation('translations', { keyPrefix: 'login' })
+    const { enqueueSnackbar } = useSnackbar()
     const [open, setOpen] = useState<any>(null)
 
     const user = useSelector((state: AuthState) => selectCurrUser(state))
 
     const handleLogOut = () => {
-        dispatch(signOut({}))
+        try {
+            dispatch(signOut({}))
+            enqueueSnackbar(t('notifications.logoutSuccessed'))
+        } catch (error) {
+            enqueueSnackbar(t('notifications.logoutFailed'), { variant: 'error' })
+            console.error(error)
+        }
     }
 
     return <>

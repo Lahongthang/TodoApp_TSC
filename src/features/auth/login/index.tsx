@@ -28,9 +28,9 @@ const LoginContainer: React.FC = () => {
     const handleLogin = async (data: any) => {
         try {
             await dispatch(authApi.endpoints.login.initiate(data)).unwrap()
-            enqueueSnackbar(t('notifications.successed'))
+            enqueueSnackbar(t('notifications.loginSuccessed'))
         } catch (error) {
-            enqueueSnackbar(t('notifications.failed'), { variant: 'error' })
+            enqueueSnackbar(t('notifications.loginFailed'), { variant: 'error' })
             showLoginError(error)
         }
     }
