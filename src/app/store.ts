@@ -3,13 +3,14 @@ import { persistStore } from "redux-persist";
 import { useSelector as useAppSelector, useDispatch as useAppDispatch } from 'react-redux'
 import rootReducer from "./rootReducer";
 import apiService from "./services/apiService";
+import { unauthenticated } from "./middlewares/unauthenticated";
 
 const store = configureStore({
     reducer: rootReducer,
     middleware: getDefaultMiddleware => 
         getDefaultMiddleware({
             serializableCheck: false,
-        }).concat([apiService.middleware])
+        }).concat([apiService.middleware, unauthenticated])
 })
 
 const persistor = persistStore(store)
