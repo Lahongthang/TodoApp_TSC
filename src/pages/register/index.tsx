@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next'
 import React from "react";
 import { Container, Card, Typography, Stack } from '@mui/material'
 import Page from "../../components/Page";
-import RegisterForm from '../../features/auth/register/RegisterForm';
+import RegisterConttainer from '../../features/auth/register';
 
 const RegisterPage: React.FC = () => {
     const { t } = useTranslation('translations', { keyPrefix: 'register' })
@@ -14,7 +14,7 @@ const RegisterPage: React.FC = () => {
                         <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
                             {t('title')}
                         </Typography>
-                        <RegisterForm />
+                        <RegisterConttainer />
                     </Stack>
                 </Card>
             </Container>

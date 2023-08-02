@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next'
 import React from "react";
 import { Container, Card, Typography, Stack } from '@mui/material'
-import LoginForm from "../../features/auth/login/LoginForm";
 import Page from "../../components/Page";
+import LoginContainer from '../../features/auth/login';
 
 const LoginPage: React.FC = () => {
     const { t } = useTranslation('translations', { keyPrefix: 'login' })
@@ -14,7 +14,7 @@ const LoginPage: React.FC = () => {
                         <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
                             {t('title')}
                         </Typography>
-                        <LoginForm />
+                        <LoginContainer />
                     </Stack>
                 </Card>
             </Container>

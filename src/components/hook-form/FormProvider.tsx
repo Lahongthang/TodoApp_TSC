@@ -3,7 +3,7 @@ import { FormProvider as Form, UseFormReturn } from 'react-hook-form'
 import { RestProps } from "../../utils/types";
 
 type Props = {
-    id: string,
+    id?: string,
     children: ReactNode,
     onSubmit: () => void,
     methods: UseFormReturn<any>,
