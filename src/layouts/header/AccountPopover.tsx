@@ -7,10 +7,13 @@ import { dispatch, useSelector } from '../../app/store';
 import { AuthState } from '../../utils/types';
 import { selectCurrUser, signOut } from '../../app/redux/auth/authSlice';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router';
 
 const AccountPopover: React.FC = () => {
     const { t } = useTranslation('translations', { keyPrefix: 'login' })
     const { enqueueSnackbar } = useSnackbar()
+    const navigate = useNavigate()
+
     const [open, setOpen] = useState<any>(null)
 
     const user = useSelector((state: AuthState) => selectCurrUser(state))
@@ -18,6 +21,7 @@ const AccountPopover: React.FC = () => {
     const handleLogOut = () => {
         try {
             dispatch(signOut({}))
+            navigate('/login')
             enqueueSnackbar(t('notifications.logoutSuccessed'))
         } catch (error) {
             enqueueSnackbar(t('notifications.logoutFailed'), { variant: 'error' })
