@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useSnackbar } from 'notistack'
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider } from "../../../components/hook-form";
@@ -12,6 +13,7 @@ import { authApi } from "../../../app/services/auth/authApi";
 
 const RegisterConttainer: React.FC = () => {
     const { t } = useTranslation('translations', { keyPrefix: 'register' })
+    const { enqueueSnackbar } = useSnackbar()
     
     const navigate = useNavigate()
 
@@ -32,8 +34,10 @@ const RegisterConttainer: React.FC = () => {
         const bodyData = (({confirmPassword, ...rest}) => rest)(data)
         try {
             await dispatch(authApi.endpoints.register.initiate(bodyData)).unwrap()
+            enqueueSnackbar(t('notifications.successed'))
             navigate('/login')
         } catch (error) {
+            enqueueSnackbar(t('notifications.failed'), { variant: 'error' })
             showRegisterError(error)
         }
     }
@@ -42,9 +46,6 @@ const RegisterConttainer: React.FC = () => {
         const { status } = error
         if (status === 422) {
             showErrors(error.data.error, setError)
-        }
-        else {
-            alert('Register Failed')
         }
     }
 

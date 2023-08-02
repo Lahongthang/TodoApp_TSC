@@ -8,6 +8,7 @@ const en = {
             password: 'Password',
             showPassword: 'Show',
             hidePassword: 'Hide',
+            remember: 'Remember?',
             loginBtn: 'Login',
             forgotPassword: 'Forgot password?'
         },
@@ -21,6 +22,10 @@ const en = {
                 min: 'Password must be at least 8 characters',
             }
         },
+        notifications: {
+            successed: 'Login successfully!',
+            failed: 'Login failed!'
+        }
     },
     register: {
         title: 'Create new account',
@@ -52,6 +57,10 @@ const en = {
                 required: 'Please enter confimation password',
                 match: 'Password do not matchs',
             },
+        },
+        notifications: {
+            successed: 'Create account successfully!',
+            failed: 'Create account failed!'
         }
     }
 }
