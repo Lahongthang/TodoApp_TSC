@@ -6,6 +6,7 @@ import LoginPage from "../pages/login";
 import AuthGuard from "../guards/AuthGuard";
 import GuestGuard from "../guards/GuestGuard";
 import RegisterPage from "../pages/register";
+import PersonalSettingPage from "../pages/personal-settings";
 
 export default function Router() {
     return useRoutes([
@@ -42,6 +43,10 @@ export default function Router() {
                 {
                     path: 'colors',
                     element: <ColorsPage />
+                },
+                {
+                    path: 'personal-settings',
+                    element: <PersonalSettingPage />
                 },
             ],
         },

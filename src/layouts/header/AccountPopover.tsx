@@ -8,6 +8,7 @@ import { AuthState } from '../../utils/types';
 import { selectCurrUser, signOut } from '../../app/redux/auth/authSlice';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
+import Iconify from '../../components/Iconify';
 
 const AccountPopover: React.FC = () => {
     const { t } = useTranslation('translations', { keyPrefix: 'login' })
@@ -57,9 +58,19 @@ const AccountPopover: React.FC = () => {
                     {user?.email}
                 </Typography>
             </Box>
+            <MenuItem
+                sx={{ color: 'primary.main' }}
+                onClick={() => {
+                    setOpen(null)
+                    navigate('/personal-settings')
+                }}
+            >
+                <Iconify icon='mingcute:user-setting-fill' sx={{ mr: 1 }} />
+                Settings
+            </MenuItem>
             <Divider sx={{ borderStyle: 'dashed' }} />
             <MenuItem sx={{ color: 'error.main' }} onClick={handleLogOut}>
-                <LogoutIcon sx={{ width: 20, height: 20, pr: 1 }} />
+                <Iconify icon='humbleicons:logout' sx={{ mr: 1 }} />
                 Logout
             </MenuItem>
         </Popover>

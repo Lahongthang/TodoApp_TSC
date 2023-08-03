@@ -76,11 +76,24 @@ const en = {
             form: {
                 username: 'User name',
                 email: 'Email address',
-                updateBtn: 'Save changes',
+                updateBtn: {
+                    content: 'Save changes',
+                    loadingIndicator: 'Saving...',
+                },
                 allowed: 'Allowed *.jpeg, *.jpg, *.png',
                 maxSize: 'max size of',
             },
-        }
+        },
+        validations: {
+            username: {
+                required: 'Please enter user name',
+                min: 'User name must be at least 6 characters',
+            },
+            email: {
+                required: 'Please enter email address',
+                valid: 'Email must be a valid email address',
+            },
+        },
     }
 }
 
