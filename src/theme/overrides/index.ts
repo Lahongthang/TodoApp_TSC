@@ -5,6 +5,7 @@ import MenuItem from "./MenuItem";
 import Popover from "./Popover";
 import Table from "./Table";
 import Card from './Card';
+import Typography from './Typography';
 
 export default function ComponentsOverrides(theme: Theme) {
     return Object.assign(
@@ -14,5 +15,6 @@ export default function ComponentsOverrides(theme: Theme) {
         Button(theme),
         Table(theme),
         Card(theme),
+        Typography(theme),
     )
 }
