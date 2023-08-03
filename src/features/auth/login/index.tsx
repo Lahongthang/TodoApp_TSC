@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from 'react-hook-form'
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useSnackbar } from 'notistack'
@@ -14,6 +14,8 @@ const LoginContainer: React.FC = () => {
     const { t } = useTranslation('translations', { keyPrefix: 'login' })
     const { enqueueSnackbar } = useSnackbar()
 
+    const [isHandling, setIsHandling] = useState<boolean>(false)
+
     const defaultValues = {
         username: 'Thangla',
         password: '123456a@',
@@ -26,12 +28,15 @@ const LoginContainer: React.FC = () => {
     const { handleSubmit, setError, formState: { errors } } = methods
 
     const handleLogin = async (data: any) => {
+        setIsHandling(true)
         try {
             await dispatch(authApi.endpoints.login.initiate(data)).unwrap()
             enqueueSnackbar(t('notifications.loginSuccessed'))
         } catch (error) {
             enqueueSnackbar(t('notifications.loginFailed'), { variant: 'error' })
             showLoginError(error)
+        } finally {
+            setIsHandling(false)
         }
     }
 
@@ -46,7 +51,7 @@ const LoginContainer: React.FC = () => {
         methods={methods}
         onSubmit={handleSubmit(handleLogin)}
     >
-        <LoginForm t={t} />
+        <LoginForm t={t} isHandling={isHandling} />
     </FormProvider>
 }
 

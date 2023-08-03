@@ -9,7 +9,10 @@ const en = {
             showPassword: 'Show',
             hidePassword: 'Hide',
             remember: 'Remember?',
-            loginBtn: 'Login',
+            loginBtn: {
+                content: 'Login',
+                loadingIndicator: 'Logging in...',
+            },
             forgotPassword: 'Forgot password?'
         },
         validations: {
@@ -40,7 +43,10 @@ const en = {
             confirmPassword: 'Confirm password',
             showPassword: 'Show',
             hidePassword: 'Hide',
-            registerBtn: 'Create',
+            registerBtn: {
+                content : 'Create account',
+                loadingIndicator: 'Creating...',
+            },
         },
         validations: {
             username: {
@@ -63,6 +69,17 @@ const en = {
         notifications: {
             registerSuccessed: 'Create account successfully!',
             registerFailed: 'Create account failed!'
+        }
+    },
+    personalSettings: {
+        general: {
+            form: {
+                username: 'User name',
+                email: 'Email address',
+                updateBtn: 'Save changes',
+                allowed: 'Allowed *.jpeg, *.jpg, *.png',
+                maxSize: 'max size of',
+            },
         }
     }
 }

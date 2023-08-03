@@ -9,10 +9,11 @@ import { RHFTextField } from "../../../components/hook-form";
 import { useToggle } from '../../../hooks';
 
 type Props = {
-    t: any
+    t: any,
+    isHandling?: boolean,
 }
 
-const RegisterForm: React.FC<Props> = ({ t }) => {
+const RegisterForm: React.FC<Props> = ({ t, isHandling }) => {
     const navigate = useNavigate()
 
     const { toggle: showPass, onToggle: onTogglePass } = useToggle()
@@ -71,8 +72,13 @@ const RegisterForm: React.FC<Props> = ({ t }) => {
                     </InputAdornment>
                 }}
             />
-            <LoadingButton size='small' type="submit" variant="contained">
-                {t('form.registerBtn')}
+            <LoadingButton
+                size='small'
+                type="submit"
+                variant="contained"
+                loading={isHandling}
+                loadingIndicator={t('form.registerBtn.loadingIndicator')}>
+                {t('form.registerBtn.content')}
             </LoadingButton>
         </Stack>
     )

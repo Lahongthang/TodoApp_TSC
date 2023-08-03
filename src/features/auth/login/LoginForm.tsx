@@ -9,10 +9,11 @@ import { RHFTextField } from "../../../components/hook-form";
 import { LoadingButton } from "@mui/lab";
 
 type Props = {
-    t: any
+    t: any,
+    isHandling?: boolean,
 }
 
-const LoginForm: React.FC<Props> = ({ t }) => {
+const LoginForm: React.FC<Props> = ({ t, isHandling = false }) => {
     const navigate = useNavigate()
     const { toggle: showPass, onToggle: onToggleShowPass } = useToggle()
     const { toggle: remember, onToggle: onToggleRemember } = useToggle()
@@ -65,8 +66,13 @@ const LoginForm: React.FC<Props> = ({ t }) => {
             <Link href="" variant="body2" alignSelf='flex-end'>
                 {t('form.forgotPassword')}
             </Link>
-            <LoadingButton size='small' type="submit" variant="contained">
-                {t('form.loginBtn')}
+            <LoadingButton
+                size='small'
+                type="submit"
+                variant="contained"
+                loading={isHandling}
+                loadingIndicator={t('form.loginBtn.loadingIndicator')}>
+                {t('form.loginBtn.content')}
             </LoadingButton>
         </Stack>
     )
