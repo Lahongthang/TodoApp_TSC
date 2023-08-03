@@ -43,11 +43,13 @@ export const authSlice = createSlice({
 const selectToken = (state: AuthState) => state.auth.token
 const selectIsAuthenticated = (state: AuthState) => state.auth.isAuthenticated
 const selectCurrUser = (state: AuthState) => state.auth.user
+const selectAuthData = (state: AuthState) => state.auth
 
 export {
     selectToken,
     selectCurrUser,
     selectIsAuthenticated,
+    selectAuthData,
 }
 
 export const {
