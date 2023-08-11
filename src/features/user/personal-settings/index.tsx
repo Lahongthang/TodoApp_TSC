@@ -15,23 +15,22 @@ import { PersonalSettingSchema } from "../../../utils/validations/personal-setti
 const PersonalSettingContainer: React.FC = () => {
     const { t } = useTranslation('translations', { keyPrefix: 'personalSettings' })
     const { auth } = useAuth()
-    const { username, email, avatar, _id } = auth.user ?? {}
 
     const [isAvatarUpdating, setIsAvatarUpdating] = useState<boolean>(false)
     const [isProfileUpdating, setIsProfileUpdating] = useState<boolean>(false)
 
     const defaultValues = {
         file: null,
-        avatar: avatar ?? '',
-        username: username ?? '',
-        email: email ?? '',
+        avatar: auth.user?.avatar ?? '',
+        username: auth.user?.username ?? '',
+        email: auth.user?.email ?? '',
     }
     const methods = useForm({
         resolver: yupResolver(PersonalSettingSchema(t)),
         defaultValues,
         mode: 'onSubmit',
     })
-    const { handleSubmit, setValue } = methods
+    const { handleSubmit, setValue, reset, resetField } = methods
 
     const handleDrop = useCallback((acceptedFiles: any) => {
         const file = acceptedFiles[0]
@@ -49,8 +48,10 @@ const PersonalSettingContainer: React.FC = () => {
         const { username, email } = data
         const bodyData = { username, email }
         try {
-            await dispatch(userApi.endpoints.updateProfile.initiate({ id: _id, data: bodyData }))
+            await dispatch(userApi.endpoints.updateProfile.initiate({ id: auth.user?.id, data: bodyData })).unwrap()
         } catch (error) {
+            resetField('username')
+            resetField('email')
             console.error(error)
         } finally {
             setIsProfileUpdating(false)
@@ -63,7 +64,7 @@ const PersonalSettingContainer: React.FC = () => {
         const formData = new FormData()
         formData.append('avatar', data.file)
         try {
-            await dispatch(userApi.endpoints.updateAvatar.initiate({ id: _id, data: formData })).unwrap()
+            await dispatch(userApi.endpoints.updateAvatar.initiate({ id: auth.user?.id, data: formData })).unwrap()
         } catch (error) {
             console.error(error)
         } finally {
