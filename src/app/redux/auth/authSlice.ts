@@ -10,7 +10,7 @@ const persistConfig = {
 
 const initialState = {
     user: {
-        _id: null,
+        id: null,
         username: null,
         email: null,
         avatar: null,
@@ -35,7 +35,7 @@ export const authSlice = createSlice({
             state.isAuthenticated = false
             state.token = null
             state.user = {
-                _id: null,
+                id: null,
                 username: null,
                 email: null,
                 avatar: null,

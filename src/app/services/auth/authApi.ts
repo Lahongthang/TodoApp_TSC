@@ -15,7 +15,7 @@ export const authApi = apiService.injectEndpoints({
                     const { data: resData } = await queryFulfilled
                     const { token, user } = resData
                     dispatch(signIn(token))
-                    await dispatch(userApi.endpoints.getMe.initiate(user._id, { forceRefetch: true })).unwrap()
+                    await dispatch(userApi.endpoints.getMe.initiate(user.id, { forceRefetch: true })).unwrap()
                 } catch (error) {
                     console.error(error)
                 }
