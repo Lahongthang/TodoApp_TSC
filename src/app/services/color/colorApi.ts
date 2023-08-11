@@ -1,4 +1,4 @@
-import { ColorItem } from "../../../utils/types/color";
+import { ColorItemType } from "../../../utils/types/color";
 import apiService from "../apiService";
 
 export const colorApi = apiService.injectEndpoints({
@@ -10,15 +10,15 @@ export const colorApi = apiService.injectEndpoints({
             }),
         }),
         addColor: builder.mutation({
-            query: (data) => ({
+            query: ({data}) => ({
                 url: 'colors/create',
                 method: 'POST',
                 data,
             }),
-            async onQueryStarted(data, { dispatch, queryFulfilled }) {
-                const { data: newColor } = await queryFulfilled
+            async onQueryStarted({data}, { dispatch, queryFulfilled }) {
+                const { data: resData } = await queryFulfilled
                 dispatch(colorApi.util.updateQueryData('getAllColor', {}, (colors) => {
-                    colors.push(newColor)
+                    colors.push(resData.data)
                 }))
             },
         }),
@@ -31,8 +31,8 @@ export const colorApi = apiService.injectEndpoints({
             async onQueryStarted({id , data}, { dispatch, queryFulfilled }) {
                 await queryFulfilled
                 dispatch(colorApi.util.updateQueryData('getAllColor', {}, (colors) => {
-                    return colors.map((color: ColorItem) => {
-                        if (color._id !== id) return color
+                    return colors.map((color: ColorItemType) => {
+                        if (color.id !== id) return color
                         return {...color, name: data.name}
                     })
                 }))
@@ -46,7 +46,7 @@ export const colorApi = apiService.injectEndpoints({
             async onQueryStarted(id, { dispatch, queryFulfilled }) {
                 await queryFulfilled
                 dispatch(colorApi.util.updateQueryData('getAllColor', {}, (colors) => {
-                    return colors.filter((color: ColorItem) => color._id !== id)
+                    return colors.filter((color: ColorItemType) => color.id !== id)
                 }))
             },
         }),

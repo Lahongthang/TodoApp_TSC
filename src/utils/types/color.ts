@@ -1,4 +1,4 @@
-export type ColorItem = {
-    _id: string,
+export type ColorItemType = {
+    id: number,
     name: string,
 }

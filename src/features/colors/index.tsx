@@ -4,15 +4,19 @@ import ColorTable from './table/ColorTable';
 import AddUpdateColorDialog from './dialog/AddUpdateColorDialog';
 import { dispatch } from '../../app/store';
 import { colorApi } from '../../app/services/color/colorApi';
-import { useToggle } from '../../hooks';
+import { useAuth, useToggle } from '../../hooks';
 
 const ColorManagement: React.FC = () => {
+    const { auth } = useAuth()
     const { toggle: open, onOpen, onClose} = useToggle()
 
-    const handleSubmit = async (data: object) => {
-        console.log({data})
+    const handleSubmit = async (data: any) => {
+        const bodyData = {
+            name: data.name,
+            userId: auth.user?.id
+        }
         try {
-            await dispatch(colorApi.endpoints.addColor.initiate(data)).unwrap()
+            await dispatch(colorApi.endpoints.addColor.initiate({data: bodyData})).unwrap()
             onClose()
         } catch (error) {
             console.error(error)

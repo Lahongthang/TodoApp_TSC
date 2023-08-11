@@ -3,7 +3,7 @@ import { TableContainer, Table, TableBody } from '@mui/material'
 import { HeadConfigItem, TableHeadCustom } from "../../../components/table";
 import { useGetAllColorQuery } from "../../../app/services/color/colorApi";
 import ColorTableRow from "./ColorTableRow";
-import { ColorItem } from "../../../utils/types/color";
+import { ColorItemType } from "../../../utils/types/color";
 
 const headConfig: HeadConfigItem[] = [
     { id: 'name', label: 'Name', width: '45%', align: 'left' },
@@ -18,8 +18,8 @@ const ColorTable: React.FC = () => {
         <Table size="small" stickyHeader>
             <TableHeadCustom headConfig={headConfig} />
             <TableBody>
-                {data?.map((color: ColorItem) => {
-                    return <ColorTableRow key={color._id} color={color} />
+                {data?.map((color: ColorItemType) => {
+                    return <ColorTableRow key={color.id} color={color} />
                 })}
             </TableBody>
         </Table>
