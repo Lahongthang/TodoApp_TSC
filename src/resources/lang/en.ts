@@ -94,7 +94,67 @@ const en = {
                 valid: 'Email must be a valid email address',
             },
         },
-    }
+    },
+    filters: {
+        filterTime: {
+            options: {
+                today: 'Today',
+                thisWeek: 'This week',
+                lastWeek: 'Last week',
+                thisMonth: 'This month',
+                lastMonth: 'Last month',
+                custom: 'Custom',
+            },
+            label: 'Time: <custom>{{value}}</custom>',
+            noneValue: 'None',
+        },
+        actions: {
+            reset: 'Reset',
+            apply: 'Apply',
+        },
+    },
+    issues: {
+        issueTypes: {
+            task: 'Task',
+            bug: 'Bug',
+            request: 'Request',
+            other: 'Other',
+        },
+        issueStatuses: {
+            open: 'Open',
+            inprogress: 'Inprogress',
+            resolved: 'Resolved',
+            closed: 'Closed',
+        },
+        issuePriorities: {
+            low: 'Low',
+            medium: 'Medium',
+            high: 'High',
+        },
+        filters: {
+            type: {
+                label: 'Type: <custom>{{value}}</custom>',
+                title: 'Select type',
+            },
+            priority: {
+                label: 'Priority: <custom>{{value}}</custom>',
+                title: 'Select priority',
+            },
+            assignee: {
+                label: 'Assignee: <custom>{{value}}</custom>',
+                title: 'Select user',
+            },
+            noneValue: 'None',
+        },
+        notifications: {
+            createIssueSuccessed: 'Create issue successfully!',
+            createIssueFailed: 'Create issue failed!',
+            updateIssueSuccessed: 'Update issue successfully!',
+            updateIssueFailed: 'Update issue failed!',
+            deleteIssueSuccessed: 'Delete issue successfully!',
+            deleteIssueFailed: 'Delete issue failed!',
+        },
+    },
 }
 
 export default en;

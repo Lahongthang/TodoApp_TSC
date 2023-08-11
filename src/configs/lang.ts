@@ -1,28 +1,29 @@
 import { enUS, viVN, jaJP } from '@mui/material/locale'
 import { enAU, ja, vi } from 'date-fns/locale'
 
-export const LANGUAGE = {
-	vi: 'vi',
-	en: 'en',
-	ja: 'ja'
+type LangType = {
+    label: string,
+    value: 'vi' | 'en' | 'ja',
+    systemValue: any,
+    icon: string,
 }
 
-export const allLangs = [
+export const allLangs: LangType[] = [
     {
         label: 'English',
-        value: LANGUAGE.en,
+        value: 'en',
         systemValue: enUS,
         icon: '/assets/icons/flags/ic_flag_en.svg',
     },
     {
         label: 'Vietnamese',
-        value: LANGUAGE.vi,
+        value: 'vi',
         systemValue: viVN,
         icon: '/assets/icons/flags/ic_flag_vn.svg',
     },
     {
         label: 'Japanese',
-        value: LANGUAGE.ja,
+        value: 'ja',
         systemValue: jaJP,
         icon: '/assets/icons/flags/ic_flag_ja.svg',
     },
@@ -30,11 +31,11 @@ export const allLangs = [
 
 export const getLocaleDateFns = (currentLang: string) => {
 	switch (currentLang) {
-		case LANGUAGE.ja:
+		case 'ja':
 			return ja
-		case LANGUAGE.en:
+		case 'en':
 			return enAU
-		case LANGUAGE.vi:
+		case 'vi':
 			return vi
 		default:
 			return ja;
