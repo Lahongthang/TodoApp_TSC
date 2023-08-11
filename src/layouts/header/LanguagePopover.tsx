@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { IconButton, Popover, Stack, MenuItem } from '@mui/material'
 import Image from "../../components/Image";
 import { useLocales } from "../../hooks";
+import MenuPopover from "../../components/MenuPopover";
 
 const LanguagePopover: React.FC = () => {
     const { currentLang, allLangs, onChangeLang } = useLocales()
@@ -24,10 +25,9 @@ const LanguagePopover: React.FC = () => {
                     sx={{ width: 28, height: 20 }}
                 />
             </IconButton>
-            <Popover
-                open={Boolean(open)}
+            <MenuPopover
+                open={open}
                 onClose={() => setOpen(null)}
-                anchorEl={open}
                 anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'right',
@@ -35,9 +35,6 @@ const LanguagePopover: React.FC = () => {
                 transformOrigin={{
                     vertical: 'top',
                     horizontal: 'right',
-                }}
-                sx={{
-                    '& .MuiPaper-root': { borderRadius: 2 }
                 }}
             >
                 <Stack spacing={0.75}>
@@ -56,7 +53,7 @@ const LanguagePopover: React.FC = () => {
                         </MenuItem>
                     ))}
                 </Stack>
-            </Popover>
+            </MenuPopover>
         </>
     )
 }

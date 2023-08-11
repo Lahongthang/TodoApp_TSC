@@ -9,6 +9,7 @@ import { selectCurrUser, signOut } from '../../app/redux/auth/authSlice';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import Iconify from '../../components/Iconify';
+import MenuPopover from '../../components/MenuPopover';
 
 const AccountPopover: React.FC = () => {
     const { t } = useTranslation('translations', { keyPrefix: 'login' })
@@ -34,10 +35,9 @@ const AccountPopover: React.FC = () => {
         <IconButton onClick={(e) => setOpen(e.currentTarget)}>
             <MyAvatar />
         </IconButton>
-        <Popover
-            open={Boolean(open)}
+        <MenuPopover
+            open={open}
             onClose={() => setOpen(null)}
-            anchorEl={open}
             anchorOrigin={{
                 vertical: 'bottom',
                 horizontal: 'right',
@@ -45,9 +45,6 @@ const AccountPopover: React.FC = () => {
             transformOrigin={{
                 vertical: 'top',
                 horizontal: 'right',
-            }}
-            sx={{
-                '& .MuiPaper-root': { borderRadius: 2 }
             }}
         >
             <Box sx={{ my: 1.5, px: 2.5 }}>
@@ -73,7 +70,7 @@ const AccountPopover: React.FC = () => {
                 <Iconify icon='humbleicons:logout' sx={{ mr: 1 }} />
                 Logout
             </MenuItem>
-        </Popover>
+        </MenuPopover>
     </>
 }
 
