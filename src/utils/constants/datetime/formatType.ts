@@ -1,6 +1,8 @@
+import { enUS, ja, vi } from 'date-fns/locale'
+
 export const FormatType = {
 	long: 'long',
-	longDate: 'longDate',
+	// longDate: 'longDate',
 	longDateAbbreviated: 'longDateAbbreviated',
 	longDateWithDay: 'longDateWithDay',
 	short: 'short',
@@ -11,4 +13,10 @@ export const FormatType = {
 	fullDateTime: "fullDateTime",
 	flexible: "flexible",
 	monthDayOnly: "monthDayOnly"
+}
+
+export const locales = {
+	en: enUS,
+	ja: ja,
+	vi: vi,
 }

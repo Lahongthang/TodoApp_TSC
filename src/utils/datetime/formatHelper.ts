@@ -3,22 +3,25 @@ import {
 	getYear, format, formatDistance, formatRelative,
 	isDate, differenceInDays, isSameDay, isSameMonth
 } from "date-fns";
-import { enUS, nl, ja } from "date-fns/locale"; // import all locales we need
+import { enUS, vi, ja } from "date-fns/locale"; // import all locales we need
 import { defaultLang } from "../../configs/lang"
 import { FormatType } from "../constants/datetime/formatType";
 
-export const locales = { enUS, nl, ja }; // used to look up the required locale
+export const locales = {
+	en: enUS,
+	vi,
+	ja }; // used to look up the required locale
 
-export const formatDate = (value: any, formatType: any, lng: 'enUS' | 'nl' | 'ja') => {
+export const formatDate = (value: any, formatType: any, lng: 'en' | 'vi' | 'ja') => {
 	if (!isDate(value)) return value;
-	const locale = locales[lng ?? 'enUS'];
+	const locale = locales[lng ?? 'en'];
 	switch (formatType) {
 		case FormatType.short:
 			return format(value, "P", { locale })
 		case FormatType.long:
 			return format(value, "PPPP", { locale })
-		case FormatType.longDate:
-			return format(value, "", { locale })
+		// case FormatType.longDate:
+		// 	return format(value, "", { locale })
 		case FormatType.longDateAbbreviated:
 			return format(value, "PPP", { locale })
 		case FormatType.longDateWithDay:
@@ -58,8 +61,8 @@ const LANGUAGES = {
 	ja: 'ja'
 }
 
-export function formatDateRange(startDate: Date, endDate: Date, language = LANGUAGES.ja as 'enUS' | 'nl' | 'ja',
-	formatType = FORMAT_TYPE.sameMonth,
+export function formatDateRange(startDate: Date, endDate: Date, language = LANGUAGES.ja as 'en' | 'vi' | 'ja',
+	formatType = FORMAT_TYPE.diffMonth,
 	defaultFromFormat = '', defaultToFormat = '') {
 	let fromDateFormat = defaultFromFormat || 'yyyy/MM/dd';
 	let toDateFormat = defaultToFormat || 'yyyy/MM/dd'
@@ -83,7 +86,7 @@ export function formatDateRange(startDate: Date, endDate: Date, language = LANGU
 	return `${formattedStartDate} ~ ${formattedEndDate}`;
 }
 
-export const getShortLabelRangeDate = (fromDate: Date, toDate: Date, lng = defaultLang.value as 'enUS' | 'nl' | 'ja') => {
+export const getShortLabelRangeDate = (fromDate: Date, toDate: Date, lng = defaultLang.value as 'en' | 'vi' | 'ja') => {
 	const currentYear = new Date().getFullYear();
 	const startDateYear = getYear(fromDate);
 
