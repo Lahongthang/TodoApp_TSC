@@ -1,4 +1,4 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material'
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Typography } from '@mui/material'
 import React from 'react'
 import { RestProps } from '../utils/types'
 
@@ -27,7 +27,9 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
             {...props}>
             <DialogTitle>{title}</DialogTitle>
             <DialogContent>
-                {content}
+                <Typography variant='body1' color={'error.main'}>
+                    {content}
+                </Typography>
             </DialogContent>
             <DialogActions>
                 <Button size='small' color='inherit' onClick={onClose}>
