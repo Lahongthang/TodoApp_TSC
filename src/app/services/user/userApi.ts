@@ -47,5 +47,15 @@ export const userApi = apiService.injectEndpoints({
                 }
             },
         }),
+        getAllUser: builder.query({
+            query: () => ({
+                url: 'users',
+                method: 'GET'
+            })
+        })
     })
 })
+
+export const {
+    useGetAllUserQuery,
+} = userApi
