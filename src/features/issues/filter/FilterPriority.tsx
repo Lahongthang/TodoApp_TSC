@@ -2,7 +2,7 @@ import { useTranslation, Trans } from "react-i18next";
 import React from "react";
 import { MenuItem, Stack, Checkbox, Typography } from '@mui/material'
 import { isEmpty } from "lodash";
-import FilterButtonPopover from "../../../components/filters/FilterButtonPopover";
+import FilterButtonPopover from "../../../components/filters/buttons/FilterButtonPopover";
 import useFilterParams from "../../../components/filters/useFilterParams";
 import { IssuePriorities } from "../utils";
 

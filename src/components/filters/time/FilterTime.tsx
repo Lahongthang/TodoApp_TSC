@@ -1,9 +1,9 @@
 import { useTranslation, Trans } from "react-i18next";
 import React, { useState } from "react";
 import { FilterOptions, FilterTimeTypes } from "./constants";
-import FilterPopover from "../FilterPopover";
+import FilterPopover from "../buttons/FilterPopover";
 import useFilterParams from "../useFilterParams";
-import FilterButton from "../FilterButton";
+import FilterButton from "../buttons/FilterButton";
 import { defineFilterTime } from "./utils";
 import CustomTimePopover from "./CustomTimePopover";
 import { getShortLabelRangeDate } from "../../../utils/datetime/formatHelper";

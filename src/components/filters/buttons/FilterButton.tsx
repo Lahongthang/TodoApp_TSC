@@ -1,7 +1,7 @@
 import React from "react";
 import { Chip, Typography } from '@mui/material'
-import Iconify from "../Iconify";
-import { RestProps } from "../../utils/types";
+import Iconify from "../../Iconify";
+import { RestProps } from "../../../utils/types";
 
 type Props = {
     open: boolean,

@@ -1,11 +1,11 @@
+import { useTranslation } from "react-i18next";
 import React, { ReactNode, useEffect, useState } from "react";
 import { Stack, MenuItem, Button, IconButton, Typography, Divider } from '@mui/material'
 import { isEmpty, isEqual } from "lodash";
-import { RestProps } from "../../utils/types";
-import Iconify from "../Iconify";
-import Scrollbar from "../Scrollbar";
-import { useTranslation } from "react-i18next";
-import MenuPopover from "../MenuPopover";
+import { RestProps } from "../../../utils/types";
+import Iconify from "../../Iconify";
+import Scrollbar from "../../Scrollbar";
+import MenuPopover from "../../MenuPopover";
 
 type Props = {
     open: any,
