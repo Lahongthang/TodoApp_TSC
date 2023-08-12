@@ -13,11 +13,12 @@ export default function useFilter({
     const isExisted = useSelector((state: any) => hasRegistered(state, registerId))
 
     useEffect(() => {
-        setRegisterId(fixedKey ?? uuidv4())
+        if (!registerId) setRegisterId(uuidv4())
+        else setRegisterId(isExisted ? uuidv4() : fixedKey)
     }, [fixedKey])
 
     useEffect(() => {
-        if (!isExisted) dispatch(registerUi({ uiId: registerId, defaultValues }))
+        if (registerId) dispatch(registerUi({ uiId: registerId, defaultValues }))
     }, [registerId])
 
     return {
