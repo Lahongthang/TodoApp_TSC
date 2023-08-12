@@ -13,6 +13,8 @@ import { IssueSchema } from "../../../utils/validations/issue/IssueSchema";
 import { useAuth } from "../../../hooks";
 import { dispatch } from "../../../app/store";
 import { formatDate } from "../../../utils/requestHelper";
+import { IssueDetailSkeleton } from "../states/IssueDetailSkeleton";
+import StateManager, { specifyState } from "../../../components/StateManager";
 
 type IssueFormContainerProps = {
     id: string,
@@ -31,8 +33,13 @@ const IssueFormContainer: React.FC<IssueFormContainerProps> = ({
     const { enqueueSnackbar } = useSnackbar()
     const { auth } = useAuth()
 
-    const { data: issue } = useGetIssueByIdQuery(issueId, { skip: !issueId })
-    const { data: users } = useGetAllUserQuery({})
+    const getIssueRes = useGetIssueByIdQuery(issueId, { skip: !issueId })
+    const getUsersRes = useGetAllUserQuery({})
+
+    const getIssueState = issueId ? specifyState(getIssueRes) : 'success'
+
+    const { data: issue } = getIssueRes
+    const { data: users } = getUsersRes
 
     const convertedUsers = useMemo(() => {
         return users?.map((user: any) => ({ ...user, label: user.username})) ?? []
@@ -106,11 +113,16 @@ const IssueFormContainer: React.FC<IssueFormContainerProps> = ({
 
     return (
         <FormProvider id={id} methods={methods} onSubmit={handleSubmit(handleFormSubmit)}>
-            <IssueForm
-                t={t}
-                issueId={issueId}
-                users={convertedUsers}
-            />
+            <StateManager
+                state={getIssueState}
+                loadingState={<IssueDetailSkeleton />}
+            >
+                <IssueForm
+                    t={t}
+                    issueId={issueId}
+                    users={convertedUsers}
+                />
+            </StateManager>
         </FormProvider>
     )
 }
