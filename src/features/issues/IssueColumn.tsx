@@ -9,7 +9,7 @@ import Iconify from "../../components/Iconify";
 import { useToggle } from "../../hooks";
 import CreateUpdateIssueDialog from "./dialog/CreateUpdateIssueDialog";
 import StateManager from "../../components/StateManager";
-import { IssueLoading } from "./states/IssueLoading";
+import { IssueSkeleton } from "./states/IssueSkeleton";
 import EmptyContent from "../../components/EmptyContent";
 import { isEmpty } from "lodash";
 
@@ -49,7 +49,7 @@ const IssueColumn: React.FC<IssueColumnProps> = ({ t, col, state, index, sx, ...
                                 {(provided) => (
                                     <Stack ref={provided.innerRef} {...provided.droppableProps} spacing={2}>
                                         <StateManager state={state === 'success' && isEmpty(col?.issues) ? 'empty' : state}
-                                            loadingState={<IssueLoading count={col.issues?.length} />}
+                                            loadingState={<IssueSkeleton count={col.issues?.length} />}
                                             emptyState={<EmptyContent imgProps={{ height: 104 }} />}
                                         >
                                             {col.issues?.map((issue: IssueItem, index: number) => (

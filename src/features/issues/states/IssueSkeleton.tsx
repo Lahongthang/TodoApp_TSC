@@ -1,11 +1,11 @@
 import React from "react";
 import { Stack, Skeleton } from '@mui/material'
 
-type IssueLoadingProps = {
+type IssueSkeletonProps = {
     count?: number
 }
 
-export const IssueLoading: React.FC<IssueLoadingProps> = ({ count = 0 }) => {
+export const IssueSkeleton: React.FC<IssueSkeletonProps> = ({ count = 0 }) => {
     const rowCount = count > 0 ? count : 2
     return (
         <Stack spacing={3}>
