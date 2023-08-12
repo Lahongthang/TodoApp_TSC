@@ -6,6 +6,8 @@ import { RestProps } from "../../../utils/types";
 import Iconify from "../../Iconify";
 import Scrollbar from "../../Scrollbar";
 import MenuPopover from "../../MenuPopover";
+import StateManager from "../../StateManager";
+import { LoadingState } from "./LoadingState";
 
 type Props = {
     open: any,
@@ -13,6 +15,7 @@ type Props = {
     value: any,
     title: string,
     options: any,
+    state?: 'default' | "success" | "idle" | "loading" | "empty" | "error",
     multiple?: boolean,
     onClose: () => void,
     renderItem?: (item: any, selected: boolean, handleChange: (id: any) => void) => ReactNode,
@@ -27,7 +30,7 @@ const ITEM_HEIGHT = 32
 const FilterPopover: React.FC<FilterPopoverProps> = ({
     open, value, title, onClose, sx, options,
     renderItem, onReset, onSelect,
-    multiple = true, ...props
+    multiple = true, state = 'success', ...props
 }) => {
     const { t } = useTranslation('translations', { keyPrefix: 'filters' })
     const [currValue, setCurrValue] = useState<any>(value)
@@ -68,18 +71,20 @@ const FilterPopover: React.FC<FilterPopoverProps> = ({
                     <Divider sx={{ borderStyle: 'dashed', mt: 0.5 }} />
                 </Stack>
                 <Scrollbar sx={{ height: ITEM_HEIGHT * 5 }}>
-                    <Stack sx={{ height: 1 }}>
-                        {options?.map((item: any) => {
-                            const selected = !!currValue?.includes(item.id)
-                            return renderItem?.(item, selected, handleChange) ?? (
-                                <MenuItem key={item.id} selected={selected} onClick={() => handleChange?.(item)}>
-                                    <Stack direction='row' alignItems='center' spacing={1}>
-                                        {item.label}
-                                    </Stack>
-                                </MenuItem>
-                            )
-                        })}
-                    </Stack>
+                    <StateManager state={state} loadingState={<LoadingState />}>
+                        <Stack sx={{ height: 1 }}>
+                            {options?.map((item: any) => {
+                                const selected = !!currValue?.includes(item.id)
+                                return renderItem?.(item, selected, handleChange) ?? (
+                                    <MenuItem key={item.id} selected={selected} onClick={() => handleChange?.(item)}>
+                                        <Stack direction='row' alignItems='center' spacing={1}>
+                                            {item.label}
+                                        </Stack>
+                                    </MenuItem>
+                                )
+                            })}
+                        </Stack>
+                    </StateManager>
                 </Scrollbar>
                 <Stack direction='row' justifyContent='flex-end'>
                     <Button size="small"

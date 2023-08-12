@@ -6,13 +6,16 @@ import FilterButtonPopover from "../../../components/filters/buttons/FilterButto
 import useFilterParams from "../../../components/filters/useFilterParams";
 import { User } from "../../../utils/types/issue";
 import { useGetAllUserQuery } from "../../../app/services/user/userApi";
+import { specifyState } from "../../../components/StateManager";
 
 const FilterAssignee: React.FC = () => {
     const { t } = useTranslation('translations', { keyPrefix: 'issues' })
     const { values, setParam } = useFilterParams()
     const { assignee } = values ?? {}
 
-    const { data: users } = useGetAllUserQuery({})
+    const response = useGetAllUserQuery({})
+    const { data: users } = response
+    const state = specifyState(response)
 
     const convertedUsers = useMemo(() => {
         return users?.map((user: User) => ({...user, label: user.username}))
@@ -41,6 +44,7 @@ const FilterAssignee: React.FC = () => {
     return (
         <FilterButtonPopover
             label={label}
+            state={state}
             value={assignee}
             onReset={handleReset}
             onSelect={handleFilter}

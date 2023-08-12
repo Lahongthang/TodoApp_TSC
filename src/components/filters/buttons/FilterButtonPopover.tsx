@@ -6,13 +6,14 @@ type FilterButtonPopoverProps = {
     value: any,
     label: any,
     title: string,
+    state?: 'default' | "success" | "idle" | "loading" | "empty" | "error",
     options: any,
     onSelect: (value: any) => void,
     onReset: () => void,
     renderItem?: (item: any, selected: boolean, handleChange: (id: any) => void) => ReactNode,
 }
 
-const FilterButtonPopover: React.FC<FilterButtonPopoverProps> = ({ value, title, label, options, renderItem, onSelect, onReset }) => {
+const FilterButtonPopover: React.FC<FilterButtonPopoverProps> = ({ value, title, label, options, state, renderItem, onSelect, onReset }) => {
     const [open, setOpen] = useState<any>(null)
 
     return (
@@ -31,6 +32,7 @@ const FilterButtonPopover: React.FC<FilterButtonPopoverProps> = ({ value, title,
                 onClose={() => setOpen(null)}
                 onSelect={onSelect}
                 renderItem={renderItem}
+                state={state}
             />}
         </>
     )
