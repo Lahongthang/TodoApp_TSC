@@ -1,22 +1,22 @@
 import React from 'react'
 import { Stack } from '@mui/material'
 import FilterContextProvider from '../../components/filters/FilterContextProvider';
-import useFilter from '../../components/filters/userFilter';
 import IssueManagement from './IssueManagement';
 import FilterToolbar from './filter';
+import SearchHistoryProvider from '../../components/filters/search-box/SearchHistoryProvider';
 
 const IssueManagementContainer: React.FC = () => {
-    const { uiId } = useFilter({
-        fixedKey: 'issue-management',
-        defaultValues: {}
-    })
+    const filterId = 'issue-management'
+    const searchId = 'search-issue'
 
     return (
-        <FilterContextProvider uiId={uiId}>
-            <Stack spacing={5}>
-                <FilterToolbar />
-                <IssueManagement />
-            </Stack>
+        <FilterContextProvider uiId={filterId}>
+            <SearchHistoryProvider uiId={searchId}>
+                <Stack spacing={5}>
+                    <FilterToolbar />
+                    <IssueManagement />
+                </Stack>
+            </SearchHistoryProvider>
         </FilterContextProvider>
     )
 }
