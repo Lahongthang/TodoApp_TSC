@@ -1,5 +1,6 @@
-import { setUser, signIn } from "../../redux/auth/authSlice";
+import { signIn } from "../../redux/auth/authSlice";
 import apiService from "../apiService";
+import { userApi } from "../user/userApi";
 
 export const authApi = apiService.injectEndpoints({
     endpoints: builder => ({
@@ -14,8 +15,7 @@ export const authApi = apiService.injectEndpoints({
                     const { data: resData } = await queryFulfilled
                     const { token, user } = resData
                     dispatch(signIn(token))
-                    const { _id, username, email } = user
-                    dispatch(setUser({ _id, username, email }))
+                    await dispatch(userApi.endpoints.getMe.initiate(user.id, { forceRefetch: true })).unwrap()
                 } catch (error) {
                     console.error(error)
                 }

@@ -7,10 +7,15 @@ import { dispatch, useSelector } from '../../app/store';
 import { AuthState } from '../../utils/types';
 import { selectCurrUser, signOut } from '../../app/redux/auth/authSlice';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router';
+import Iconify from '../../components/Iconify';
+import MenuPopover from '../../components/MenuPopover';
 
 const AccountPopover: React.FC = () => {
     const { t } = useTranslation('translations', { keyPrefix: 'login' })
     const { enqueueSnackbar } = useSnackbar()
+    const navigate = useNavigate()
+
     const [open, setOpen] = useState<any>(null)
 
     const user = useSelector((state: AuthState) => selectCurrUser(state))
@@ -18,6 +23,7 @@ const AccountPopover: React.FC = () => {
     const handleLogOut = () => {
         try {
             dispatch(signOut({}))
+            navigate('/login')
             enqueueSnackbar(t('notifications.logoutSuccessed'))
         } catch (error) {
             enqueueSnackbar(t('notifications.logoutFailed'), { variant: 'error' })
@@ -29,10 +35,9 @@ const AccountPopover: React.FC = () => {
         <IconButton onClick={(e) => setOpen(e.currentTarget)}>
             <MyAvatar />
         </IconButton>
-        <Popover
-            open={Boolean(open)}
+        <MenuPopover
+            open={open}
             onClose={() => setOpen(null)}
-            anchorEl={open}
             anchorOrigin={{
                 vertical: 'bottom',
                 horizontal: 'right',
@@ -40,9 +45,6 @@ const AccountPopover: React.FC = () => {
             transformOrigin={{
                 vertical: 'top',
                 horizontal: 'right',
-            }}
-            sx={{
-                '& .MuiPaper-root': { borderRadius: 2 }
             }}
         >
             <Box sx={{ my: 1.5, px: 2.5 }}>
@@ -53,12 +55,22 @@ const AccountPopover: React.FC = () => {
                     {user?.email}
                 </Typography>
             </Box>
+            <MenuItem
+                sx={{ color: 'primary.main' }}
+                onClick={() => {
+                    setOpen(null)
+                    navigate('/personal-settings')
+                }}
+            >
+                <Iconify icon='mingcute:user-setting-fill' sx={{ mr: 1 }} />
+                Settings
+            </MenuItem>
             <Divider sx={{ borderStyle: 'dashed' }} />
             <MenuItem sx={{ color: 'error.main' }} onClick={handleLogOut}>
-                <LogoutIcon sx={{ width: 20, height: 20, pr: 1 }} />
+                <Iconify icon='humbleicons:logout' sx={{ mr: 1 }} />
                 Logout
             </MenuItem>
-        </Popover>
+        </MenuPopover>
     </>
 }
 

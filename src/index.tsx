@@ -1,3 +1,5 @@
+import 'simplebar/src/simplebar.css';
+
 import './locales/i18n'
 
 import ReactDOM from 'react-dom/client';

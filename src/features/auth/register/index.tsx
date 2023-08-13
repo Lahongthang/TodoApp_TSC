@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSnackbar } from 'notistack'
 import { useForm } from "react-hook-form";
@@ -14,8 +14,9 @@ import { authApi } from "../../../app/services/auth/authApi";
 const RegisterConttainer: React.FC = () => {
     const { t } = useTranslation('translations', { keyPrefix: 'register' })
     const { enqueueSnackbar } = useSnackbar()
-    
     const navigate = useNavigate()
+
+    const [isHandling, setIsHandling] = useState<boolean>(false)
 
     const defaultValues = {
         username: '',
@@ -31,6 +32,7 @@ const RegisterConttainer: React.FC = () => {
     const { handleSubmit, setError} = methods
 
     const handleRegister = async (data: any) => {
+        setIsHandling(true)
         const bodyData = (({confirmPassword, ...rest}) => rest)(data)
         try {
             await dispatch(authApi.endpoints.register.initiate(bodyData)).unwrap()
@@ -39,6 +41,8 @@ const RegisterConttainer: React.FC = () => {
         } catch (error) {
             enqueueSnackbar(t('notifications.registerFailed'), { variant: 'error' })
             showRegisterError(error)
+        } finally {
+            setIsHandling(false)
         }
     }
 
@@ -53,7 +57,7 @@ const RegisterConttainer: React.FC = () => {
         <FormProvider
             methods={methods}
             onSubmit={handleSubmit(handleRegister)}>
-            <RegisterForm t={t} />
+            <RegisterForm t={t} isHandling={isHandling} />
         </FormProvider>
     )
 }

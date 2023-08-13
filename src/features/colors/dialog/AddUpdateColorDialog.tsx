@@ -5,13 +5,13 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup'
 import { FormProvider } from "../../../components/hook-form";
 import ColorForm from "./ColorForm";
-import { ColorItem } from "../../../utils/types/color";
+import { ColorItemType } from "../../../utils/types/color";
 import { ColorSchema } from "../../../utils/validations/color/ColorSchema";
 
 type Props = {
     open: boolean,
     onClose: () => void,
-    color?: ColorItem,
+    color?: ColorItemType,
     onSubmit: (data: object) => void,
 }
 

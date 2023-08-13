@@ -1,11 +1,12 @@
 import { Navigate, useRoutes } from "react-router-dom";
 import ApplicationLayout from "../layouts";
 import ColorsPage from "../pages/colors";
-import TodosPage from "../pages/todos";
+import IssuesPage from "../pages/issues";
 import LoginPage from "../pages/login";
 import AuthGuard from "../guards/AuthGuard";
 import GuestGuard from "../guards/GuestGuard";
 import RegisterPage from "../pages/register";
+import PersonalSettingPage from "../pages/personal-settings";
 
 export default function Router() {
     return useRoutes([
@@ -33,15 +34,19 @@ export default function Router() {
                 },
                 {
                     path: 'home',
-                    element: <>Home page</>
+                    element: <IssuesPage />
                 },
+                // {
+                //     path: 'issues-management',
+                //     element: <IssuesPage />,
+                // },
+                // {
+                //     path: 'colors',
+                //     element: <ColorsPage />
+                // },
                 {
-                    path: 'todos',
-                    element: <TodosPage />,
-                },
-                {
-                    path: 'colors',
-                    element: <ColorsPage />
+                    path: 'personal-settings',
+                    element: <PersonalSettingPage />
                 },
             ],
         },

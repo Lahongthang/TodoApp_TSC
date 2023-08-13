@@ -6,39 +6,44 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { TableRowStyle } from "./styles"
 import { transformToCapitalize, transformToLowerCase } from "../../../utils/transformText";
 import { RestProps } from "../../../utils/types";
-import { useToggle } from "../../../hooks";
+import { useAuth, useToggle } from "../../../hooks";
 import ConfirmDialog from "../../../components/ConfirmDialog";
 import { dispatch } from "../../../app/store";
-import { ColorItem } from "../../../utils/types/color";
+import { ColorItemType } from "../../../utils/types/color";
 import { colorApi } from "../../../app/services/color/colorApi";
 import AddUpdateColorDialog from "../dialog/AddUpdateColorDialog";
+import MenuPopover from "../../../components/MenuPopover";
 
 type Props = {
-    color: ColorItem
+    color: ColorItemType
 }
 
 type ColorTableRowProps = Props & RestProps
 
 const ColorTableRow: React.FC<ColorTableRowProps> = ({ color, ...props }) => {
-    const { _id, name } = color ?? {}
+    const { auth } = useAuth()
+    const { id, name } = color ?? {}
 
     const [openMenu, setOpenMenu] = useState<any>(null)
-    const [editColor, setEditColor] = useState<ColorItem>()
+    const [editColor, setEditColor] = useState<ColorItemType>()
     const { toggle: openConfirmDial, onOpen: onOpenConfirmDial, onClose: onCloseConfirmDial } = useToggle()
 
     const handleDeleteColor = async () => {
         try {
-            await dispatch(colorApi.endpoints.deleteColor.initiate(_id)).unwrap()
+            await dispatch(colorApi.endpoints.deleteColor.initiate(id)).unwrap()
             onCloseConfirmDial()
         } catch (error) {
             console.error(error)
         }
     }
 
-    const handleUpdateColor = async (data: object) => {
-        console.log({data})
+    const handleUpdateColor = async (data: any) => {
+        const bodyData = {
+            name: data.name,
+            userId: auth.user?.id,
+        }
         try {
-            await dispatch(colorApi.endpoints.updateColor.initiate({id: _id, data})).unwrap()
+            await dispatch(colorApi.endpoints.updateColor.initiate({ id, data: bodyData })).unwrap()
             setEditColor(undefined)
         } catch (error) {
             console.error(error)
@@ -66,9 +71,8 @@ const ColorTableRow: React.FC<ColorTableRowProps> = ({ color, ...props }) => {
                 </IconButton>
             </TableCell>
         </TableRowStyle>
-        {openMenu && <Popover
-            open={Boolean(openMenu)}
-            anchorEl={openMenu}
+        {openMenu && <MenuPopover
+            open={openMenu}
             onClose={() => setOpenMenu(null)}
             anchorOrigin={{
                 vertical: 'bottom',
@@ -104,7 +108,7 @@ const ColorTableRow: React.FC<ColorTableRowProps> = ({ color, ...props }) => {
                 <DeleteIcon sx={{ pr: 1 }} />
                 Delete
             </MenuItem>
-        </Popover>}
+        </MenuPopover>}
         {openConfirmDial && <ConfirmDialog
             open={openConfirmDial}
             onClose={onCloseConfirmDial}

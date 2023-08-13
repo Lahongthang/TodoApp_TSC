@@ -17,9 +17,10 @@ export type AuthState = {
 }
 
 type User = {
-    _id: string,
+    id: string,
     username: string,
     email: string,
+    avatar: string,
 }
 
 // snackbar
