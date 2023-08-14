@@ -17,8 +17,8 @@ const LoginContainer: React.FC = () => {
     const [isHandling, setIsHandling] = useState<boolean>(false)
 
     const defaultValues = {
-        username: 'Thangla',
-        password: '123456a@',
+        username: '',
+        password: '',
     }
     const methods = useForm({
         resolver: yupResolver(LoginSchema(t)),

@@ -1,5 +1,6 @@
 const en = {
     login: {
+        pageTitle: 'Sign In',
         title: 'Sign In',
         noAccount: 'New user? <custom>{{action}}</custom>',
         createAccount: 'Create an account',
@@ -33,6 +34,7 @@ const en = {
         }
     },
     register: {
+        pageTitle: 'Register',
         title: 'Create new account',
         haveAccount: 'Already have an account? <custom>{{action}}</custom>',
         signIn: 'Sign In',
@@ -72,6 +74,7 @@ const en = {
         }
     },
     personalSettings: {
+        pageTitle: 'Personal Settings',
         general: {
             form: {
                 username: 'User name',
@@ -114,6 +117,7 @@ const en = {
         },
     },
     issues: {
+        pageTitle: 'Issue Management',
         issueTypes: {
             task: 'Task',
             bug: 'Bug',

@@ -7,7 +7,7 @@ import PersonalSettingContainer from '../../features/user/personal-settings';
 const PersonalSettingPage: React.FC = () => {
     const { t } = useTranslation('translations', { keyPrefix: 'personalSettings' })
     return (
-        <Page title={t('title')} sx={{ height: 1 }}>
+        <Page title={t('pageTitle')} sx={{ height: 1 }}>
             <Container maxWidth='md' sx={{ height: 1 }}>
                 <PersonalSettingContainer />
             </Container>
