@@ -7,7 +7,7 @@ import LoginContainer from '../../features/auth/login';
 const LoginPage: React.FC = () => {
     const { t } = useTranslation('translations', { keyPrefix: 'login' })
     return (
-        <Page title={t('title')} sx={{ height: 1 }}>
+        <Page title={t('pageTitle')} sx={{ height: 1 }}>
             <Container maxWidth='sm' sx={{ height: 1 }}>
                 <Card sx={{
                     px: 7,

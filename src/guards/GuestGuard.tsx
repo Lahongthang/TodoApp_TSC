@@ -13,7 +13,6 @@ type GuestGuardProps = Props & RestProps
 
 const GuestGuard: React.FC<GuestGuardProps> = ({ children, redirectTo = '/', ...props }) => {
     const isAuthenticated = useSelector((state: AuthState) => selectIsAuthenticated(state))
-    console.log({isAuthenticated})
     if (isAuthenticated) return <Navigate to={redirectTo} {...props} />
     return <>{children}</>
 }
