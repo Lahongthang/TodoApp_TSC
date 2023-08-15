@@ -25,8 +25,10 @@ export const filterSlice = createSlice({
         reset(state, action) {
             const { uiId } = action.payload
             const defaultValues = state[uiId].defaultValues
+            const keyword = state[uiId].keyword
             state[uiId] = {
                 ...defaultValues,
+                keyword,
                 defaultValues,
             }
         }
