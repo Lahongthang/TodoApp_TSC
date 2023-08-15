@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
-import { IconButton, Popover, Box, Typography, Divider, MenuItem } from '@mui/material';
-import LogoutIcon from '@mui/icons-material/Logout';
+import { IconButton, Box, Typography, Divider, MenuItem } from '@mui/material';
 import { useSnackbar } from 'notistack'
 import MyAvatar from '../../components/MyAvatar';
 import { dispatch, useSelector } from '../../app/store';
 import { AuthState } from '../../utils/types';
-import { selectCurrUser, signOut } from '../../app/redux/auth/authSlice';
+import { selectCurrUser } from '../../app/redux/auth/authSlice';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import Iconify from '../../components/Iconify';
 import MenuPopover from '../../components/MenuPopover';
+import { authApi } from '../../app/services/auth/authApi';
 
 const AccountPopover: React.FC = () => {
     const { t } = useTranslation('translations', { keyPrefix: 'login' })
@@ -20,9 +20,9 @@ const AccountPopover: React.FC = () => {
 
     const user = useSelector((state: AuthState) => selectCurrUser(state))
 
-    const handleLogOut = () => {
+    const handleLogOut = async () => {
         try {
-            dispatch(signOut({}))
+            await dispatch(authApi.endpoints.logout.initiate({})).unwrap()
             navigate('/login')
             enqueueSnackbar(t('notifications.logoutSuccessed'))
         } catch (error) {

@@ -1,4 +1,4 @@
-import { signIn } from "../../redux/auth/authSlice";
+import { signIn, signOut } from "../../redux/auth/authSlice";
 import apiService from "../apiService";
 import { userApi } from "../user/userApi";
 
@@ -20,6 +20,20 @@ export const authApi = apiService.injectEndpoints({
                     console.error(error)
                 }
             }
+        }),
+        logout: builder.mutation({
+            query: () => ({
+                url: 'logout',
+                method: 'POST',
+            }),
+            async onQueryStarted(_, { dispatch, queryFulfilled }) {
+                try {
+                    await queryFulfilled
+                    dispatch(signOut({}))
+                } catch (error) {
+                    console.error(error)
+                }
+            },
         }),
         register: builder.mutation({
             query: (data) => ({
