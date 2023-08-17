@@ -50,6 +50,27 @@ const en = {
                 loadingIndicator: 'Creating...',
             },
         },
+        confirmCard: {
+            title: 'Confirm email',
+            desc: 'Let us know that this email address belongs to you. Enter the code from the email sent to <custom>{{email}}</custom>',
+            sendMailAgain: 'Send email again',
+            updateInfoBtn: 'Update info',
+            confirmBtn: {
+                content: 'Confirm',
+                loadingIndicator: 'Confirming...',
+            },
+        },
+        completeCard: {
+            cardTitle: 'Completed!',
+            title: 'Create account successfully!',
+            content: {
+                username: 'User name: <custom>{{username}}</custom>',
+                email: 'Email: <custom>{{email}}</custom>',
+            },
+            actions: {
+                signIn: 'Sign In',
+            },
+        },
         validations: {
             username: {
                 required: 'Please enter user name',
@@ -66,6 +87,9 @@ const en = {
             confirmPassword: {
                 required: 'Please enter confimation password',
                 match: 'Password do not matchs',
+            },
+            confirmCode: {
+                required: 'Please enter verification code',
             },
         },
         notifications: {

@@ -35,12 +35,19 @@ export const authApi = apiService.injectEndpoints({
                 }
             },
         }),
+        confirmEmail: builder.mutation({
+            query: (data) => ({
+                url: 'confirm-email',
+                method: 'POST',
+                data,
+            }),
+        }),
         register: builder.mutation({
             query: (data) => ({
                 url: 'register',
                 method: 'POST',
                 data,
-            })
+            }),
         }),
     })
 })
