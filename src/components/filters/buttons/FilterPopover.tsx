@@ -98,7 +98,7 @@ const FilterPopover: React.FC<FilterPopoverProps> = ({
                         {t('actions.reset')}
                     </Button>
                     <Button size="small"
-                        disabled={isEqual(value, currValue)}
+                        disabled={isEqual(value, currValue) || (isEmpty(value) && isEmpty(currValue))}
                         onClick={() => {
                             onSelect(currValue)
                             onClose()
