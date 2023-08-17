@@ -4,8 +4,8 @@ import apiService from "../apiService";
 export const userApi = apiService.injectEndpoints({
     endpoints: builder => ({
         getMe: builder.query({
-            query: (id) => ({
-                url: `me/${id}`,
+            query: () => ({
+                url: 'me',
                 method: 'GET',
             }),
             async onQueryStarted(id, { dispatch, queryFulfilled }) {
