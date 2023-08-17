@@ -99,6 +99,10 @@ const en = {
     },
     personalSettings: {
         pageTitle: 'Personal Settings',
+        tabs: {
+            general: 'General Info',
+            security: 'Security',
+        },
         general: {
             form: {
                 username: 'User name',
