@@ -20,7 +20,7 @@ const RegisterConttainer: React.FC = () => {
     const { enqueueSnackbar } = useSnackbar()
 
     const [isHandling, setIsHandling] = useState<boolean>(false)
-    const [openConfirmEmail, setOpenConfirmEmail] = useState<boolean>(false)
+    const [openConfirmAccount, setOpenConfirmAccount] = useState<boolean>(false)
     const [isSuccess, setIsSuccess] = useState<boolean>(false)
 
     const defaultValues = {
@@ -31,25 +31,25 @@ const RegisterConttainer: React.FC = () => {
         confirmCode: '',
     }
     const methods = useForm({
-        resolver: yupResolver(RegisterSchema(t, openConfirmEmail)),
+        resolver: yupResolver(RegisterSchema(t, openConfirmAccount)),
         defaultValues,
         mode: 'onSubmit',
     })
     const { handleSubmit, setError, getValues } = methods
 
     const handleFormSubmit = () => {
-        if (openConfirmEmail) handleRegister()
-        else handleConfirmEmail()
+        if (openConfirmAccount) handleRegister()
+        else handleConfirmAccount()
     }
 
-    const handleConfirmEmail = async () => {
+    const handleConfirmAccount = async () => {
         setIsHandling(true)
         const data = getValues()
         const { username, email, password } = data ?? {}
         const bodyData = { username, email, password }
         try {
-            await dispatch(authApi.endpoints.confirmEmail.initiate(bodyData)).unwrap()
-            setOpenConfirmEmail(true)
+            await dispatch(authApi.endpoints.confirmAccount.initiate(bodyData)).unwrap()
+            setOpenConfirmAccount(true)
         } catch (error) {
             showRegisterError(error)
         } finally {
@@ -63,7 +63,7 @@ const RegisterConttainer: React.FC = () => {
         const bodyData = (({confirmPassword, ...rest}) => rest)(data)
         try {
             await dispatch(authApi.endpoints.register.initiate(bodyData)).unwrap()
-            setOpenConfirmEmail(false)
+            setOpenConfirmAccount(false)
             setIsSuccess(true)
             enqueueSnackbar(t('notifications.registerSuccessed'))
         } catch (error) {
@@ -88,13 +88,13 @@ const RegisterConttainer: React.FC = () => {
                     methods={methods}
                     style={{ height: '100%' }}
                     onSubmit={handleSubmit(handleFormSubmit)}>
-                    {!openConfirmEmail ? (
+                    {!openConfirmAccount ? (
                         <RegisterCard t={t} isHandling={isHandling} />
                     ) : (
                         <ConfirmCard t={t}
                             forForm={FORM_ID}
-                            onSendMailAgain={handleConfirmEmail}
-                            onCloseConfirm={() => setOpenConfirmEmail(false)}
+                            onSendMailAgain={handleConfirmAccount}
+                            onCloseConfirm={() => setOpenConfirmAccount(false)}
                             isHandling={isHandling}
                         />
                     )}
