@@ -1,4 +1,15 @@
 const en = {
+    account: {
+        menuItems: {
+            home: 'Home',
+            settings: 'Settings',
+            logout: 'Logout',
+        },
+        notifications: {
+            logoutSuccessed: 'Logout successfully!',
+            logoutFailed: 'Logout failed!',
+        }
+    },
     login: {
         pageTitle: 'Sign In',
         title: 'Sign In',
@@ -101,18 +112,42 @@ const en = {
         pageTitle: 'Personal Settings',
         tabs: {
             general: 'General Info',
+            email: 'Email',
             security: 'Security',
         },
         general: {
+            title: 'General info',
             form: {
                 username: 'User name',
-                email: 'Email address',
+                address: 'Address',
+                phone: 'Phone',
+                about: 'About',
+                resetBtn: 'Reset',
                 updateBtn: {
                     content: 'Save changes',
                     loadingIndicator: 'Saving...',
                 },
+                changeAvatarBtn: {
+                    content: 'Change avatar',
+                    loadingIndicator: 'Changing...',
+                },
                 allowed: 'Allowed *.jpeg, *.jpg, *.png',
                 maxSize: 'max size of',
+            },
+        },
+        email: {
+
+        },
+        security: {
+            title: 'Security',
+            form: {
+                oldPassword: 'Old password',
+                newPassword: 'New password',
+                confirmPassword: 'Confirm new password',
+                updateBtn: {
+                    content: 'Save changes',
+                    loadingIndicator: 'Saving...',
+                },
             },
         },
         validations: {
@@ -124,7 +159,24 @@ const en = {
                 required: 'Please enter email address',
                 valid: 'Email must be a valid email address',
             },
+            oldPassword: {
+                required: 'Please enter old password',
+            },
+            newPassword: {
+                required: 'Please enter new password',
+                min: 'Password must be at least 8 characters',
+            },
+            confirmPassword: {
+                required: 'Please enter confimation password',
+                match: 'Password do not matchs',
+            }
         },
+        notifications: {
+            updateInfoSuccessed: 'Update info successfully!',
+            updateInfoFailed : 'Update info failed!',
+            changePasswordSuccessed: 'Change password successfully!',
+            changePasswordFailed: 'Change password failed!',
+        }
     },
     filters: {
         filterTime: {

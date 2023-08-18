@@ -4,6 +4,7 @@ import { Tab, Tabs } from "@mui/material";
 import Iconify from "../../../components/Iconify";
 import { useTabs } from "../../../hooks";
 import GeneralContainer from './general'
+import SecurityContainer from './security'
 
 const iconStyles = {
     width: 18, height: 18,
@@ -16,11 +17,17 @@ const getTabs = (t: any) => ([
         icon: <Iconify icon="ic:round-account-box" sx={iconStyles} />,
         component: <GeneralContainer />,
     },
+    // {
+    //     value: 'email',
+    //     label: t(`tabs.email`),
+    //     icon: <Iconify icon="ic:round-email" sx={iconStyles} />,
+    //     component: <>Email</>,
+    // },
     {
         value: 'security',
         label: t(`tabs.security`),
         icon: <Iconify icon="ic:round-vpn-key" sx={iconStyles} />,
-        component: <>Change password</>,
+        component: <SecurityContainer />,
     },
 ]);
 

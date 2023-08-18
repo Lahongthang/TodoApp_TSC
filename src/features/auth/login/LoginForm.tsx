@@ -23,7 +23,7 @@ const LoginForm: React.FC<Props> = ({ t, isHandling = false }) => {
     const { toggle: showPass, onToggle: onToggleShowPass } = useToggle()
 
     return (
-        <Stack spacing={5}>
+        <Stack spacing={5} justifyContent='center' sx={{ height: 1 }}>
             <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
                 {t('title')}
             </Typography>

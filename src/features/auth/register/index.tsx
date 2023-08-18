@@ -11,6 +11,7 @@ import { authApi } from "../../../app/services/auth/authApi";
 import ConfirmCard from "./ConfirmCard";
 import RegisterCard from "./RegisterCard";
 import CompleteCard from "./CompleteCard";
+import { Box } from "@mui/material";
 
 const FORM_ID = 'register-form'
 
@@ -81,10 +82,11 @@ const RegisterConttainer: React.FC = () => {
     }
 
     return (
-        <>
+        <Box sx={{ height: 1 }}>
             {!isSuccess ? (
                 <FormProvider id={FORM_ID}
                     methods={methods}
+                    style={{ height: '100%' }}
                     onSubmit={handleSubmit(handleFormSubmit)}>
                     {!openConfirmEmail ? (
                         <RegisterCard t={t} isHandling={isHandling} />
@@ -100,7 +102,7 @@ const RegisterConttainer: React.FC = () => {
             ) : (
                 <CompleteCard t={t} data={getValues()} />
             )}
-        </>
+        </Box>
     )
 }
 

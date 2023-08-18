@@ -5,7 +5,7 @@ import { RestProps } from "../../utils/types";
 type Props = {
     id?: string,
     children: ReactNode,
-    onSubmit: () => void,
+    onSubmit?: () => void,
     methods: UseFormReturn<any>,
 }
 
@@ -17,8 +17,8 @@ const FormProvider: React.FC<FormProviderProps> = ({ id, methods, children, onSu
             <form id={id}
                 noValidate
                 onSubmit={onSubmit}
-                style={{ height: '100%' }}
-                {...props}>
+                {...props}
+            >
                 {children}
             </form>
         </Form>

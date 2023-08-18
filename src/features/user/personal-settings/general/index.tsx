@@ -1,17 +1,16 @@
 import { useTranslation } from "react-i18next";
-import React, { useCallback, useState } from "react";
-import { Grid, Card, Typography } from '@mui/material'
+import React, { useCallback, useMemo, useState } from "react";
+import { Grid } from '@mui/material'
 import { useSnackbar } from 'notistack'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider } from "../../../../components/hook-form";
-import RHFUploadAvatar from "../../../../components/hook-form/RHFUploadAvatar";
-import { fData } from "../../../../utils/formatNumber";
-import GeneralForm from "./GeneralForm";
+import GeneralCard from "./GeneralCard";
 import { useAuth } from "../../../../hooks";
 import { dispatch } from "../../../../app/store";
 import { userApi } from "../../../../app/services/user/userApi";
-import { PersonalSettingSchema } from "../../../../utils/validations/personal-settings/PersonalSettingSchema";
+import { GeneralSchema } from "../../../../utils/validations/personal-settings/GeneralSchema";
+import AvatarCard from "./AvatarCard";
 
 const GeneralContainer: React.FC = () => {
     const { t } = useTranslation('translations', { keyPrefix: 'personalSettings' })
@@ -21,17 +20,21 @@ const GeneralContainer: React.FC = () => {
     const [isAvatarUpdating, setIsAvatarUpdating] = useState<boolean>(false)
     const [isProfileUpdating, setIsProfileUpdating] = useState<boolean>(false)
 
-    const defaultValues = {
+    const defaultValues = useMemo(() => ({
         file: null,
         avatar: auth.user?.avatar ?? '',
         username: auth.user?.username ?? '',
-        email: auth.user?.email ?? '',
-    }
+        phone: auth.user?.phone ?? '',
+        address: auth.user?.address ?? '',
+        about: auth.user?.about ?? '',
+    }), [auth.user])
+
     const methods = useForm({
-        resolver: yupResolver(PersonalSettingSchema(t)),
+        resolver: yupResolver(GeneralSchema(t)),
         defaultValues,
         mode: 'onSubmit',
     })
+
     const { handleSubmit, setValue, resetField } = methods
 
     const handleDrop = useCallback((acceptedFiles: any) => {
@@ -47,15 +50,22 @@ const GeneralContainer: React.FC = () => {
 
     const updateProfile = async (data: any) => {
         setIsProfileUpdating(true)
-        const { username, email } = data
-        const bodyData = { username, email }
+        const { username, phone, address, about } = data
+        const bodyData = {
+            username,
+            phone: phone.replaceAll('-', ''),
+            address,
+            about
+        }
         try {
-            await dispatch(userApi.endpoints.updateProfile.initiate({ id: auth.user?.id, data: bodyData })).unwrap()
-            enqueueSnackbar('Update info successfully!')
+            await dispatch(userApi.endpoints.updateProfile.initiate(bodyData)).unwrap()
+            enqueueSnackbar(t('notifications.updateInfoSuccessed'))
         } catch (error) {
             resetField('username')
-            resetField('email')
-            enqueueSnackbar('Update info failed!', { variant: 'error' })
+            resetField('phone')
+            resetField('address')
+            resetField('about')
+            enqueueSnackbar(t('notifications.updateInfoFailed'), { variant: 'error' })
             console.error(error)
         } finally {
             setIsProfileUpdating(false)
@@ -68,51 +78,33 @@ const GeneralContainer: React.FC = () => {
         const formData = new FormData()
         formData.append('avatar', data.file)
         try {
-            await dispatch(userApi.endpoints.updateAvatar.initiate({ id: auth.user?.id, data: formData })).unwrap()
-            enqueueSnackbar('Update info successfully!')
+            await dispatch(userApi.endpoints.updateAvatar.initiate(formData)).unwrap()
+            enqueueSnackbar(t('notifications.updateInfoSuccessed'))
         } catch (error) {
-            enqueueSnackbar('Update info failed!', { variant: 'error' })
+            enqueueSnackbar(t('notifications.updateInfoFailed'), { variant: 'error' })
+            resetField('avatar')
             console.error(error)
         } finally {
             setIsAvatarUpdating(false)
+            setValue('file', null)
         }
     }
 
-    const handleFormSubmit = (data: any) => {
-        updateAvatar(data)
-        updateProfile(data)
-    }
-
     return (
-        <FormProvider methods={methods} onSubmit={handleSubmit(handleFormSubmit)}>
+        <FormProvider methods={methods}>
             <Grid container spacing={3}>
                 <Grid item xs={12} sm={4}>
-                    <Card>
-                        <RHFUploadAvatar
-                            name="avatar"
-                            maxSize={3145728}
-                            onDrop={handleDrop}
-                            helperText={
-                                <Typography variant="caption"
-                                    sx={{
-                                        mt: 2, mx: 'auto',
-                                        display: 'block',
-                                        textAlign: 'center',
-                                        color: 'text.secondary',
-                                    }}>
-                                    {t('general.form.allowed')}
-                                    <br/>
-                                    {t('general.form.maxSize')} {fData(3145728)}
-                                </Typography>
-                            }
-                        />
-                    </Card>
+                    <AvatarCard t={t}
+                        onDrop={handleDrop}
+                        isHandling={isAvatarUpdating}
+                        onSubmit={handleSubmit(updateAvatar)}
+                    />
                 </Grid>
                 <Grid item xs={12} sm={8}>
-                    <Card>
-                        <GeneralForm t={t}
-                            isHandling={isAvatarUpdating || isProfileUpdating} />
-                    </Card>
+                    <GeneralCard t={t}
+                        isHandling={isProfileUpdating}
+                        onSubmit={handleSubmit(updateProfile)}
+                    />
                 </Grid>
             </Grid>
         </FormProvider>

@@ -18,12 +18,12 @@ export const userApi = apiService.injectEndpoints({
             },
         }),
         updateProfile: builder.mutation({
-            query: ({ id, data }) => ({
-                url: `me/${id}`,
+            query: (data) => ({
+                url: 'me',
                 method: 'PUT',
                 data,
             }),
-            async onQueryStarted({ id, data }, { dispatch, queryFulfilled }) {
+            async onQueryStarted(data, { dispatch, queryFulfilled }) {
                 try {
                     await queryFulfilled
                     dispatch(updateUserProfile(data))
@@ -33,12 +33,12 @@ export const userApi = apiService.injectEndpoints({
             },
         }),
         updateAvatar: builder.mutation({
-            query: ({ id, data }) => ({
-                url: `me/${id}/avatar`,
+            query: (data) => ({
+                url: 'me/avatar',
                 method: 'PUT',
                 data,
             }),
-            async onQueryStarted({ id, data }, { dispatch, queryFulfilled }) {
+            async onQueryStarted(data, { dispatch, queryFulfilled }) {
                 try {
                     const { data } = await queryFulfilled
                     dispatch(updateUserAvatar(data.data.avatar))
@@ -46,6 +46,13 @@ export const userApi = apiService.injectEndpoints({
                     console.error(error)
                 }
             },
+        }),
+        changePassword: builder.mutation({
+            query: (data) => ({
+                url: 'me/change-password',
+                method: 'PUT',
+                data
+            })
         }),
         getAllUser: builder.query({
             query: () => ({
