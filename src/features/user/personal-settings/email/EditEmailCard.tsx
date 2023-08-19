@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import React from "react";
 import { Card, CardHeader, Stack } from "@mui/material";
 import { RHFTextField } from "../../../../components/hook-form";
@@ -9,28 +10,29 @@ type EditEmailCardProps = {
 }
 
 const EditEmailCard: React.FC<EditEmailCardProps> = ({ isHandling , onSubmit }) => {
+    const { t } = useTranslation('translations', { keyPrefix: 'personalSettings' })
+
     return (
         <Card>
-            <CardHeader title={'Email'} />
+            <CardHeader title={t('email.title')} />
             <Stack spacing={2}>
                 <RHFTextField
                     name='oldEmail'
-                    label='Old email'
+                    label={t('email.form.oldEmail')}
                     InputProps={{
                         readOnly: true
                     }}
                 />
-                <RHFTextField name='newEmail' label='New email' />
+                <RHFTextField name='newEmail' label={t('email.form.newEmail')} />
                 <Stack direction='row' justifyContent='flex-end'>
                     <LoadingButton
                         size="small"
                         type='submit'
+                        onClick={onSubmit}
                         variant="contained"
                         loading={isHandling}
-                        loadingIndicator={'Saving...'}
-                        onClick={onSubmit}
-                    >
-                        Save Changes
+                        loadingIndicator={t('email.form.updateBtn.loadingIndicator')}>
+                        {t('email.form.updateBtn.content')}
                     </LoadingButton>
                 </Stack>
             </Stack>

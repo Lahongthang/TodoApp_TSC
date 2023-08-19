@@ -10,7 +10,7 @@ const IssuesPage: React.FC = () => {
     return <Page title={t('pageTitle')}>
         <Container maxWidth='lg'>
             <HeaderBreadcrumbs
-                heading='Issue management'
+                heading={t('header.heading')}
             />
             <IssueManagementContainer />
         </Container>

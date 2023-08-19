@@ -118,7 +118,6 @@ const IssueFormContainer: React.FC<IssueFormContainerProps> = ({
                 loadingState={<IssueDetailSkeleton />}
             >
                 <IssueForm
-                    t={t}
                     issueId={issueId}
                     users={convertedUsers}
                 />

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import React from "react";
 import { Divider, Stack, Typography } from '@mui/material'
 import { useFormContext } from 'react-hook-form'
@@ -10,32 +11,39 @@ import SelectIssueStatusTextField from "../../../components/customs/autocomplete
 import { IssuePriorities, IssueStatues, IssueTypes } from "../utils";
 
 type Props = {
-    t: any,
     issueId?: number,
     users: any,
 }
 
 type IssueFormProps = Props & RestProps
 
-const AssigneeTextField = withAction(SelectUserTextField, { icon: 'bi:person-fill', actionTitle: 'Assign to myself' })
+const AssigneeTextField = withAction(SelectUserTextField, { icon: 'bi:person-fill' })
 
-const IssueForm: React.FC<IssueFormProps> = ({ t, issueId, users, ...props }) => {
+const IssueForm: React.FC<IssueFormProps> = ({ issueId, users, ...props }) => {
+    const { t } = useTranslation('translations', { keyPrefix: 'issues' })
+    
     const { setValue, clearErrors, watch } = useFormContext()
+    
     const { auth } = useAuth()
 
     return (
         <Stack spacing={2} sx={{ pt: 1 }} {...props}>
-            <RHFTextField multiline rows={2} name='title' label='Title' />
+            <RHFTextField
+                rows={2}
+                multiline
+                name='title'
+                label={t('CreateUpdateIssueDialog.form.title')}
+            />
             <Divider sx={{ borderStyle: 'dashed' }} />
             <Stack direction='row' spacing={2}>
                 <RHFAutoComplete
                     name='type'
-                    label="Type"
+                    label={t('CreateUpdateIssueDialog.form.type')}
                     options={IssueTypes(t)}
                 />
                 <SelectIssueStatusTextField
                     name='status'
-                    label="Status"
+                    label={t('CreateUpdateIssueDialog.form.status')}
                     options={IssueStatues(t)}
                     readOnly={!issueId}
                     disabled={!issueId}
@@ -44,13 +52,14 @@ const IssueForm: React.FC<IssueFormProps> = ({ t, issueId, users, ...props }) =>
             <Stack direction='row' spacing={2}>
                 <RHFAutoComplete
                     name='priority'
-                    label="Priority"
+                    label={t('CreateUpdateIssueDialog.form.priority')}
                     options={IssuePriorities(t)}
                     sx={{ width: '50%' }}
                 />
                 <AssigneeTextField
                     name='assignee'
-                    label="Assignee"
+                    label={t('CreateUpdateIssueDialog.form.assignee')}
+                    actionTitle={t('CreateUpdateIssueDialog.form.assignToMySelf')}
                     options={users}
                     sx={{ width: '50%' }}
                     onActionSubmit={() => {
@@ -60,15 +69,15 @@ const IssueForm: React.FC<IssueFormProps> = ({ t, issueId, users, ...props }) =>
                 />
             </Stack>
             <Stack direction='row' spacing={2}>
-                <RHFDatePicker name="startDate" />
-                <RHFDatePicker name="endDate" minDate={watch('startDate')} />
+                <RHFDatePicker name="startDate" label={t('CreateUpdateIssueDialog.form.startDate')} />
+                <RHFDatePicker name="endDate" minDate={watch('startDate')} label={t('CreateUpdateIssueDialog.form.endDate')} />
             </Stack>
             <Divider sx={{ borderStyle: 'dashed' }} />
             <Stack spacing={1}>
                 <Typography variant="caption">
-                    Please enter description in the comments
+                    {t('CreateUpdateIssueDialog.form.descDescription')}
                 </Typography>
-                <RHFTextField multiline rows={3} name='description' label='Description' />
+                <RHFTextField multiline rows={3} name='description' label={t('CreateUpdateIssueDialog.form.description')} />
             </Stack>
         </Stack>
     )

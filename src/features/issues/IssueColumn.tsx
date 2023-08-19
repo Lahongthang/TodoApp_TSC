@@ -75,7 +75,7 @@ const IssueColumn: React.FC<IssueColumnProps> = ({ t, col, state, index, sx, ...
                                     }}
                                     onClick={onOpenIssueDial}
                                 >
-                                    Add
+                                    {t('addIssueBtn')}
                                 </Button>
                             </Stack>
                         </Stack>

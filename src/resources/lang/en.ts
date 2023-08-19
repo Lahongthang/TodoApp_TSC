@@ -30,7 +30,6 @@ const en = {
             password: 'Password',
             showPassword: 'Show',
             hidePassword: 'Hide',
-            remember: 'Remember?',
             loginBtn: {
                 content: 'Login',
                 loadingIndicator: 'Logging in...',
@@ -110,6 +109,9 @@ const en = {
     },
     personalSettings: {
         pageTitle: 'Personal Settings',
+        header: {
+            heading: 'Personal Settings',
+        },
         tabs: {
             general: 'General Info',
             email: 'Email',
@@ -136,7 +138,15 @@ const en = {
             },
         },
         email: {
-
+            title: 'Email',
+            form: {
+                oldEmail: 'Old email',
+                newEmail: 'New email',
+                updateBtn: {
+                    content: 'Save changes',
+                    loadingIndicator: 'Saving...',
+                },
+            },
         },
         security: {
             title: 'Security',
@@ -207,6 +217,47 @@ const en = {
     },
     issues: {
         pageTitle: 'Issue Management',
+        header: {
+            heading: 'Issue Management',
+        },
+        CreateUpdateIssueDialog: {
+            title: {
+                add: 'Add new issue',
+                update: 'Edit issue',
+            },
+            form: {
+                title: 'Title',
+                type: 'Type',
+                status: 'Status',
+                priority: 'Priority',
+                assignee: 'Assignee',
+                assignToMySelf: 'Assign to myself',
+                startDate: 'Start date',
+                endDate: 'End date',
+                description: 'Description',
+                descDescription: 'Please enter description in the comments',
+                cancelBtn: 'Cancel',
+                updateBtn: {
+                    content: 'Update',
+                    loadingIndicator: 'Updating...',
+                },
+                addBtn: {
+                    content: 'Add',
+                    loadingIndicator: 'Adding...',
+                }
+            },
+        },
+        addIssueBtn: 'Add',
+        menu: {
+            edit: 'Edit',
+            delete: 'Delete',
+        },
+        confirmDialog: {
+            title: 'Are you sure to delete this issue?',
+            content: 'This issue will be deleted',
+            cancelBtn: 'Cancel',
+            deleteBtn: 'Delete',
+        },
         issueTypes: {
             task: 'Task',
             bug: 'Bug',
@@ -238,6 +289,8 @@ const en = {
                 title: 'Select user',
             },
             noneValue: 'None',
+            resetBtn: 'Reset',
+            searchPlaceholder: 'Enter keyword here',
         },
         notifications: {
             createIssueSuccessed: 'Create issue successfully!',

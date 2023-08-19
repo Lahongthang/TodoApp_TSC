@@ -14,15 +14,18 @@ type Props = {
 
 type CreateUpdateIssueDialogProps = Props & RestProps
 
+const FORM_ID = 'issue-form'
+
 const CreateUpdateIssueDialog: React.FC<CreateUpdateIssueDialogProps> = ({ open, status, issueId, onClose, ...props }) => {
-    const { t } = useTranslation('translations', { keyPrefix: 'issues' })
-    const FORM_ID = 'issue-form'
+    const { t } = useTranslation('translations', { keyPrefix: 'issues.CreateUpdateIssueDialog' })
 
     const [isHandling, setIsHandling] = useState<boolean>(false)
 
+    const isEditMode = !!issueId
+
     return (
         <Dialog fullWidth maxWidth='sm' open={open} onClose={onClose} {...props}>
-            <DialogTitle>Add new issue</DialogTitle>
+            <DialogTitle>{t(`title.${isEditMode ? 'update' : 'add'}`)}</DialogTitle>
             <DialogContent>
                 <IssueFormContainer
                     id={FORM_ID}
@@ -38,7 +41,7 @@ const CreateUpdateIssueDialog: React.FC<CreateUpdateIssueDialogProps> = ({ open,
             </DialogContent>
             <DialogActions>
                 <Button size="small" color="inherit" onClick={onClose}>
-                    Cancel
+                    {t('form.cancelBtn')}
                 </Button>
                 <LoadingButton
                     size="small"
@@ -46,9 +49,9 @@ const CreateUpdateIssueDialog: React.FC<CreateUpdateIssueDialogProps> = ({ open,
                     type="submit"
                     form={FORM_ID}
                     loading={isHandling}
-                    loadingIndicator={'Adding...'}
+                    loadingIndicator={t(`form.${isEditMode ? 'updateBtn' : 'addBtn'}.loadingIndicator`)}
                 >
-                    {issueId ? 'Update' : 'Add'}
+                    {t(`form.${isEditMode ? 'updateBtn' : 'addBtn'}.content`)}
                 </LoadingButton>
             </DialogActions> 
         </Dialog>

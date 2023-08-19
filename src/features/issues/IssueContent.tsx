@@ -106,7 +106,7 @@ const IssueContent: React.FC<IssueContentProps> = ({ issue, status, ...props }) 
                         }}
                     >
                         <EditIcon sx={{ pr: 1 }} />
-                        Edit
+                        {t('menu.edit')}
                     </MenuItem>
                     <MenuItem
                         sx={{
@@ -119,7 +119,7 @@ const IssueContent: React.FC<IssueContentProps> = ({ issue, status, ...props }) 
                         }}
                     >
                         <DeleteIcon sx={{ pr: 1 }} />
-                        Delete
+                        {t('menu.delete')}
                     </MenuItem>
                 </MenuPopover>
             )}
@@ -135,11 +135,11 @@ const IssueContent: React.FC<IssueContentProps> = ({ issue, status, ...props }) 
                 <ConfirmDialog
                     open={openConfirmDial}
                     onClose={onCloseConfirmDial}
-                    title={'Are you sure to delete this issue?'}
-                    content={'This issue will be deleted'}
-                    cancelText={'Cancel'}
-                    confirmText={'Delete'}
                     onConfirm={handleDeleteIssue}
+                    title={t('confirmDialog.title')}
+                    content={t('confirmDialog.content')}
+                    cancelText={t('confirmDialog.cancelBtn')}
+                    confirmText={t('confirmDialog.deleteBtn')}
                 />
             )}
         </>
