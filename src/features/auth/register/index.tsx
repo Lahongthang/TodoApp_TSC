@@ -8,18 +8,22 @@ import { RegisterSchema } from "../../../utils/validations/auth/RegisterSchema";
 import { showErrors } from "../../../utils/validations/validationHelper";
 import { dispatch } from "../../../app/store";
 import { authApi } from "../../../app/services/auth/authApi";
-import ConfirmCard from "./ConfirmCard";
 import RegisterCard from "./RegisterCard";
 import CompleteCard from "./CompleteCard";
+import { Box } from "@mui/material";
+import withConfirmEmail from "../../../components/withConfirmEmail";
 
 const FORM_ID = 'register-form'
 
-const RegisterConttainer: React.FC = () => {
+const RegistrationContainer = withConfirmEmail(RegisterCard)
+
+const RegisterManagement: React.FC = () => {
     const { t } = useTranslation('translations', { keyPrefix: 'register' })
     const { enqueueSnackbar } = useSnackbar()
 
-    const [isHandling, setIsHandling] = useState<boolean>(false)
-    const [openConfirmEmail, setOpenConfirmEmail] = useState<boolean>(false)
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+    const [isConfirming, setIsConfirming] = useState<boolean>(false)
+    const [openConfirmAccount, setOpenConfirmAccount] = useState<boolean>(false)
     const [isSuccess, setIsSuccess] = useState<boolean>(false)
 
     const defaultValues = {
@@ -30,46 +34,46 @@ const RegisterConttainer: React.FC = () => {
         confirmCode: '',
     }
     const methods = useForm({
-        resolver: yupResolver(RegisterSchema(t, openConfirmEmail)),
+        resolver: yupResolver(RegisterSchema(t, openConfirmAccount)),
         defaultValues,
         mode: 'onSubmit',
     })
     const { handleSubmit, setError, getValues } = methods
 
     const handleFormSubmit = () => {
-        if (openConfirmEmail) handleRegister()
-        else handleConfirmEmail()
+        if (openConfirmAccount) handleRegister()
+        else handleConfirmAccount()
     }
 
-    const handleConfirmEmail = async () => {
-        setIsHandling(true)
+    const handleConfirmAccount = async () => {
+        setIsConfirming(true)
         const data = getValues()
         const { username, email, password } = data ?? {}
         const bodyData = { username, email, password }
         try {
-            await dispatch(authApi.endpoints.confirmEmail.initiate(bodyData)).unwrap()
-            setOpenConfirmEmail(true)
+            await dispatch(authApi.endpoints.confirmAccount.initiate(bodyData)).unwrap()
+            setOpenConfirmAccount(true)
         } catch (error) {
             showRegisterError(error)
         } finally {
-            setIsHandling(false)
+            setIsConfirming(false)
         }
     }
 
     const handleRegister = async () => {
-        setIsHandling(true)
+        setIsSubmitting(true)
         const data = getValues()
         const bodyData = (({confirmPassword, ...rest}) => rest)(data)
         try {
             await dispatch(authApi.endpoints.register.initiate(bodyData)).unwrap()
-            setOpenConfirmEmail(false)
+            setOpenConfirmAccount(false)
             setIsSuccess(true)
             enqueueSnackbar(t('notifications.registerSuccessed'))
         } catch (error) {
             enqueueSnackbar(t('notifications.registerFailed'), { variant: 'error' })
             showRegisterError(error)
         } finally {
-            setIsHandling(false)
+            setIsSubmitting(false)
         }
     }
 
@@ -81,27 +85,26 @@ const RegisterConttainer: React.FC = () => {
     }
 
     return (
-        <>
+        <Box sx={{ height: 1 }}>
             {!isSuccess ? (
                 <FormProvider id={FORM_ID}
                     methods={methods}
+                    style={{ height: '100%' }}
                     onSubmit={handleSubmit(handleFormSubmit)}>
-                    {!openConfirmEmail ? (
-                        <RegisterCard t={t} isHandling={isHandling} />
-                    ) : (
-                        <ConfirmCard t={t}
-                            forForm={FORM_ID}
-                            onSendMailAgain={handleConfirmEmail}
-                            onCloseConfirm={() => setOpenConfirmEmail(false)}
-                            isHandling={isHandling}
-                        />
-                    )}
+                    <RegistrationContainer t={t}
+                        formId={FORM_ID}
+                        isSubmitting={isSubmitting}
+                        isConfirming={isConfirming}
+                        onCloseConfirm={() => setOpenConfirmAccount(false)}
+                        showConfirm={openConfirmAccount}
+                        onSendMail={handleConfirmAccount}
+                    />
                 </FormProvider>
             ) : (
                 <CompleteCard t={t} data={getValues()} />
             )}
-        </>
+        </Box>
     )
 }
 
-export default RegisterConttainer;
+export default RegisterManagement;

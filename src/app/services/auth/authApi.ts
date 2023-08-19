@@ -35,9 +35,9 @@ export const authApi = apiService.injectEndpoints({
                 }
             },
         }),
-        confirmEmail: builder.mutation({
+        confirmAccount: builder.mutation({
             query: (data) => ({
-                url: 'confirm-email',
+                url: 'confirm-account',
                 method: 'POST',
                 data,
             }),

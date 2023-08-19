@@ -1,4 +1,25 @@
 const en = {
+    account: {
+        menuItems: {
+            home: 'Home',
+            settings: 'Settings',
+            logout: 'Logout',
+        },
+        notifications: {
+            logoutSuccessed: 'Logout successfully!',
+            logoutFailed: 'Logout failed!',
+        }
+    },
+    EmailConfimation: {
+        title: 'Confirm email',
+        desc: 'Let us know that this email address belongs to you. Enter the code from the email sent to <custom>{{email}}</custom>',
+        sendCodeAgain: 'Send code again',
+        cancelBtn: 'Cancel',
+        confirmBtn: {
+            content: 'Confirm',
+            loadingIndicator: 'Confirming...',
+        },
+    },
     login: {
         pageTitle: 'Sign In',
         title: 'Sign In',
@@ -50,16 +71,6 @@ const en = {
                 loadingIndicator: 'Creating...',
             },
         },
-        confirmCard: {
-            title: 'Confirm email',
-            desc: 'Let us know that this email address belongs to you. Enter the code from the email sent to <custom>{{email}}</custom>',
-            sendMailAgain: 'Send email again',
-            updateInfoBtn: 'Update info',
-            confirmBtn: {
-                content: 'Confirm',
-                loadingIndicator: 'Confirming...',
-            },
-        },
         completeCard: {
             cardTitle: 'Completed!',
             title: 'Create account successfully!',
@@ -99,16 +110,44 @@ const en = {
     },
     personalSettings: {
         pageTitle: 'Personal Settings',
+        tabs: {
+            general: 'General Info',
+            email: 'Email',
+            security: 'Security',
+        },
         general: {
+            title: 'General info',
             form: {
                 username: 'User name',
-                email: 'Email address',
+                address: 'Address',
+                phone: 'Phone',
+                about: 'About',
+                resetBtn: 'Reset',
                 updateBtn: {
                     content: 'Save changes',
                     loadingIndicator: 'Saving...',
                 },
+                changeAvatarBtn: {
+                    content: 'Change avatar',
+                    loadingIndicator: 'Changing...',
+                },
                 allowed: 'Allowed *.jpeg, *.jpg, *.png',
                 maxSize: 'max size of',
+            },
+        },
+        email: {
+
+        },
+        security: {
+            title: 'Security',
+            form: {
+                oldPassword: 'Old password',
+                newPassword: 'New password',
+                confirmPassword: 'Confirm new password',
+                updateBtn: {
+                    content: 'Save changes',
+                    loadingIndicator: 'Saving...',
+                },
             },
         },
         validations: {
@@ -116,11 +155,37 @@ const en = {
                 required: 'Please enter user name',
                 min: 'User name must be at least 6 characters',
             },
-            email: {
-                required: 'Please enter email address',
+            oldEmail: {
+                required: 'Please enter old email address',
                 valid: 'Email must be a valid email address',
             },
+            newEmail: {
+                required: 'Please enter new email address',
+                valid: 'Email must be a valid email address',
+            },
+            confirmCode: {
+                required: 'Please enter verification code'
+            },
+            oldPassword: {
+                required: 'Please enter old password',
+            },
+            newPassword: {
+                required: 'Please enter new password',
+                min: 'Password must be at least 8 characters',
+            },
+            confirmPassword: {
+                required: 'Please enter confimation password',
+                match: 'Password do not matchs',
+            }
         },
+        notifications: {
+            updateInfoSuccessed: 'Update info successfully!',
+            updateInfoFailed : 'Update info failed!',
+            changePasswordSuccessed: 'Change password successfully!',
+            changePasswordFailed: 'Change password failed!',
+            changeEmailSuccessed: 'Change email successfully!',
+            changeEmailFailed: 'Change email failed!',
+        }
     },
     filters: {
         filterTime: {

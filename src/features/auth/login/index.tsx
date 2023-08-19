@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import React, { useState } from "react";
-import { Card, Stack, alpha } from '@mui/material'
+import { Card, alpha } from '@mui/material'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useSnackbar } from 'notistack'
@@ -48,23 +48,21 @@ const LoginContainer: React.FC = () => {
         }
     }
 
-    return <FormProvider
-        methods={methods}
-        onSubmit={handleSubmit(handleLogin)}
-    >
-        <Card sx={{
+    return <Card sx={{
             px: 7,
             height: 1,
             display: 'flex',
             borderRadius: 0,
             backgroundColor: theme => alpha(theme.palette.primary.light, 0.03)
         }}>
-            <Stack sx={{ width: 1 }} justifyContent='center'>
+            <FormProvider
+                methods={methods}
+                onSubmit={handleSubmit(handleLogin)}
+            >
                 <LoginForm t={t} isHandling={isHandling} />
-            </Stack>
+            </FormProvider>
         </Card>
         
-    </FormProvider>
 }
 
 export default LoginContainer;

@@ -21,6 +21,9 @@ type User = {
     username: string,
     email: string,
     avatar: string,
+    phone: string,
+    address: string,
+    about: string,
 }
 
 // snackbar

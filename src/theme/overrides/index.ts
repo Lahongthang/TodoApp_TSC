@@ -9,6 +9,7 @@ import Typography from './Typography';
 import Autocomplete from './Autocomplete';
 import DatePicker from './DatePicker';
 import Checkbox from './Checkbox';
+import Tabs from './Tabs';
 
 export default function ComponentsOverrides(theme: Theme) {
     return Object.assign(
@@ -22,5 +23,6 @@ export default function ComponentsOverrides(theme: Theme) {
         Autocomplete(theme),
         DatePicker(theme),
         Checkbox(theme),
+        Tabs(theme),
     )
 }

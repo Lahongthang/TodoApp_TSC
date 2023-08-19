@@ -14,6 +14,9 @@ const initialState = {
         username: null,
         email: null,
         avatar: null,
+        phone: null,
+        address: null,
+        about: null,
     },
     isAuthenticated: false,
     token: null,
@@ -39,6 +42,9 @@ export const authSlice = createSlice({
                 username: null,
                 email: null,
                 avatar: null,
+                phone: null,
+                address: null,
+                about: null,
             }
             state.loggedOutAt = new Date()
         },
