@@ -47,6 +47,28 @@ export const userApi = apiService.injectEndpoints({
                 }
             },
         }),
+        confirmEmail: builder.mutation({
+            query: (data) => ({
+                url: 'me/confirm-email',
+                method: 'POST',
+                data,
+            }),
+        }),
+        changeEmail: builder.mutation({
+            query: (data) => ({
+                url: 'me/change-email',
+                method: 'PUT',
+                data,
+            }),
+            async onQueryStarted(data, { dispatch, queryFulfilled }) {
+                try {
+                    await queryFulfilled
+                    dispatch(updateUserProfile({ email: data.email }))
+                } catch (error) {
+                    console.error(error)
+                }
+            },
+        }),
         changePassword: builder.mutation({
             query: (data) => ({
                 url: 'me/change-password',

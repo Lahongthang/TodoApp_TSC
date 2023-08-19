@@ -5,6 +5,7 @@ import Iconify from "../../../components/Iconify";
 import { useTabs } from "../../../hooks";
 import GeneralContainer from './general'
 import SecurityContainer from './security'
+import EmailManagement from './email'
 
 const iconStyles = {
     width: 18, height: 18,
@@ -17,12 +18,12 @@ const getTabs = (t: any) => ([
         icon: <Iconify icon="ic:round-account-box" sx={iconStyles} />,
         component: <GeneralContainer />,
     },
-    // {
-    //     value: 'email',
-    //     label: t(`tabs.email`),
-    //     icon: <Iconify icon="ic:round-email" sx={iconStyles} />,
-    //     component: <>Email</>,
-    // },
+    {
+        value: 'email',
+        label: t(`tabs.email`),
+        icon: <Iconify icon="ic:round-email" sx={iconStyles} />,
+        component: <EmailManagement />,
+    },
     {
         value: 'security',
         label: t(`tabs.security`),
