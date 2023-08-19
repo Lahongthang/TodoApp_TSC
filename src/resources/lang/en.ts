@@ -10,6 +10,16 @@ const en = {
             logoutFailed: 'Logout failed!',
         }
     },
+    EmailConfimation: {
+        title: 'Confirm email',
+        desc: 'Let us know that this email address belongs to you. Enter the code from the email sent to <custom>{{email}}</custom>',
+        sendCodeAgain: 'Send code again',
+        cancelBtn: 'Cancel',
+        confirmBtn: {
+            content: 'Confirm',
+            loadingIndicator: 'Confirming...',
+        },
+    },
     login: {
         pageTitle: 'Sign In',
         title: 'Sign In',
@@ -59,16 +69,6 @@ const en = {
             registerBtn: {
                 content : 'Create account',
                 loadingIndicator: 'Creating...',
-            },
-        },
-        confirmCard: {
-            title: 'Confirm email',
-            desc: 'Let us know that this email address belongs to you. Enter the code from the email sent to <custom>{{email}}</custom>',
-            sendMailAgain: 'Send email again',
-            updateInfoBtn: 'Update info',
-            confirmBtn: {
-                content: 'Confirm',
-                loadingIndicator: 'Confirming...',
             },
         },
         completeCard: {
@@ -155,9 +155,16 @@ const en = {
                 required: 'Please enter user name',
                 min: 'User name must be at least 6 characters',
             },
-            email: {
-                required: 'Please enter email address',
+            oldEmail: {
+                required: 'Please enter old email address',
                 valid: 'Email must be a valid email address',
+            },
+            newEmail: {
+                required: 'Please enter new email address',
+                valid: 'Email must be a valid email address',
+            },
+            confirmCode: {
+                required: 'Please enter verification code'
             },
             oldPassword: {
                 required: 'Please enter old password',
@@ -176,6 +183,8 @@ const en = {
             updateInfoFailed : 'Update info failed!',
             changePasswordSuccessed: 'Change password successfully!',
             changePasswordFailed: 'Change password failed!',
+            changeEmailSuccessed: 'Change email successfully!',
+            changeEmailFailed: 'Change email failed!',
         }
     },
     filters: {

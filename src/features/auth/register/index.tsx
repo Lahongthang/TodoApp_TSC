@@ -8,18 +8,21 @@ import { RegisterSchema } from "../../../utils/validations/auth/RegisterSchema";
 import { showErrors } from "../../../utils/validations/validationHelper";
 import { dispatch } from "../../../app/store";
 import { authApi } from "../../../app/services/auth/authApi";
-import ConfirmCard from "./ConfirmCard";
 import RegisterCard from "./RegisterCard";
 import CompleteCard from "./CompleteCard";
 import { Box } from "@mui/material";
+import withConfirmEmail from "../../../components/withConfirmEmail";
 
 const FORM_ID = 'register-form'
 
-const RegisterConttainer: React.FC = () => {
+const RegistrationContainer = withConfirmEmail(RegisterCard)
+
+const RegisterManagement: React.FC = () => {
     const { t } = useTranslation('translations', { keyPrefix: 'register' })
     const { enqueueSnackbar } = useSnackbar()
 
-    const [isHandling, setIsHandling] = useState<boolean>(false)
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+    const [isConfirming, setIsConfirming] = useState<boolean>(false)
     const [openConfirmAccount, setOpenConfirmAccount] = useState<boolean>(false)
     const [isSuccess, setIsSuccess] = useState<boolean>(false)
 
@@ -43,7 +46,7 @@ const RegisterConttainer: React.FC = () => {
     }
 
     const handleConfirmAccount = async () => {
-        setIsHandling(true)
+        setIsConfirming(true)
         const data = getValues()
         const { username, email, password } = data ?? {}
         const bodyData = { username, email, password }
@@ -53,12 +56,12 @@ const RegisterConttainer: React.FC = () => {
         } catch (error) {
             showRegisterError(error)
         } finally {
-            setIsHandling(false)
+            setIsConfirming(false)
         }
     }
 
     const handleRegister = async () => {
-        setIsHandling(true)
+        setIsSubmitting(true)
         const data = getValues()
         const bodyData = (({confirmPassword, ...rest}) => rest)(data)
         try {
@@ -70,7 +73,7 @@ const RegisterConttainer: React.FC = () => {
             enqueueSnackbar(t('notifications.registerFailed'), { variant: 'error' })
             showRegisterError(error)
         } finally {
-            setIsHandling(false)
+            setIsSubmitting(false)
         }
     }
 
@@ -88,16 +91,14 @@ const RegisterConttainer: React.FC = () => {
                     methods={methods}
                     style={{ height: '100%' }}
                     onSubmit={handleSubmit(handleFormSubmit)}>
-                    {!openConfirmAccount ? (
-                        <RegisterCard t={t} isHandling={isHandling} />
-                    ) : (
-                        <ConfirmCard t={t}
-                            forForm={FORM_ID}
-                            onSendMailAgain={handleConfirmAccount}
-                            onCloseConfirm={() => setOpenConfirmAccount(false)}
-                            isHandling={isHandling}
-                        />
-                    )}
+                    <RegistrationContainer t={t}
+                        formId={FORM_ID}
+                        isSubmitting={isSubmitting}
+                        isConfirming={isConfirming}
+                        onCloseConfirm={() => setOpenConfirmAccount(false)}
+                        showConfirm={openConfirmAccount}
+                        onSendMail={handleConfirmAccount}
+                    />
                 </FormProvider>
             ) : (
                 <CompleteCard t={t} data={getValues()} />
@@ -106,4 +107,4 @@ const RegisterConttainer: React.FC = () => {
     )
 }
 
-export default RegisterConttainer;
+export default RegisterManagement;
