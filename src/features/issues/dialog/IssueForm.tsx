@@ -27,7 +27,7 @@ const IssueForm: React.FC<IssueFormProps> = ({ issueId, users, ...props }) => {
     const { auth } = useAuth()
 
     return (
-        <Stack spacing={2} sx={{ pt: 1 }} {...props}>
+        <Stack spacing={2} {...props}>
             <RHFTextField
                 rows={2}
                 multiline

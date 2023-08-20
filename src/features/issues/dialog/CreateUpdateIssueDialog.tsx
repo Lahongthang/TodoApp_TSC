@@ -1,9 +1,10 @@
 import { useTranslation } from "react-i18next";
 import React, { useState } from "react";
 import { LoadingButton } from "@mui/lab";
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
+import { Button, Stack, IconButton, Dialog, DialogActions, DialogContent, Typography } from "@mui/material";
 import { RestProps } from "../../../utils/types";
 import IssueFormContainer from "./IssueFormContainer";
+import Iconify from "../../../components/Iconify";
 
 type Props = {
     open: boolean,
@@ -24,8 +25,15 @@ const CreateUpdateIssueDialog: React.FC<CreateUpdateIssueDialogProps> = ({ open,
     const isEditMode = !!issueId
 
     return (
-        <Dialog fullWidth maxWidth='sm' open={open} onClose={onClose} {...props}>
-            <DialogTitle>{t(`title.${isEditMode ? 'update' : 'add'}`)}</DialogTitle>
+        <Dialog fullWidth maxWidth='sm' open={open} {...props}>
+            <Stack direction='row' alignItems='center' justifyContent='space-between' sx={{ px: 1.5, pt: 1 }}>
+                <Typography variant="h6">
+                    {t(`title.${isEditMode ? 'update' : 'add'}`)}
+                </Typography>
+                <IconButton size="small" sx={{ borderRadius: 2 }} onClick={onClose}>
+                    <Iconify icon="eva:close-fill" />
+                </IconButton>
+            </Stack>
             <DialogContent>
                 <IssueFormContainer
                     id={FORM_ID}
