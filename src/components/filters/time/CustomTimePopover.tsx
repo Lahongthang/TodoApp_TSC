@@ -65,8 +65,8 @@ const CustomTimePopover: React.FC<CustomTimePopoverProps> = ({ t, open, sx, onCl
             <Stack spacing={1}>
                 <Stack>
                     <Stack direction='row' alignItems='center' justifyContent='space-between'>
-                        <Typography variant="subtitle2">
-                            Select time
+                        <Typography variant="subtitle2" sx={{ px: 1 }}>
+                            {t('filterTime.custom.title')}
                         </Typography>
                         <IconButton size="small"
                             sx={{ borderRadius: 2 }}
@@ -79,7 +79,7 @@ const CustomTimePopover: React.FC<CustomTimePopoverProps> = ({ t, open, sx, onCl
                 </Stack>
 
                 <FormProvider id={FORM_ID} methods={methods} onSubmit={handleSubmit(handleSelectTime)}>
-                    <CustomTimeForm />
+                    <CustomTimeForm t={t} />
                 </FormProvider>
 
                 <Stack direction='row' justifyContent='flex-end'>
@@ -88,7 +88,7 @@ const CustomTimePopover: React.FC<CustomTimePopoverProps> = ({ t, open, sx, onCl
                         disabled={!values?.time}
                         onClick={handleReset}
                     >
-                        Reset
+                        {t('filterTime.custom.resetBtn')}
                     </Button>
                     <LoadingButton size="small"
                         type="submit"
@@ -98,7 +98,7 @@ const CustomTimePopover: React.FC<CustomTimePopoverProps> = ({ t, open, sx, onCl
                             (isEqual(period?.fromDate, watch('fromDate')) && isEqual(period?.toDate, watch('toDate')))
                         }
                     >
-                        Apply
+                        {t('filterTime.custom.applyBtn')}
                     </LoadingButton>
                 </Stack>
             </Stack>

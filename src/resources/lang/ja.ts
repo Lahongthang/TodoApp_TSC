@@ -207,6 +207,13 @@ const ja = {
                 lastMonth: '先月',
                 custom: 'カスタム',
             },
+            custom: {
+                title: '時間の選択',
+                from: '開始日',
+                to: '終了日',
+                resetBtn: 'リセット',
+                applyBtn: '適用する',
+            },
             label: '時間: <custom>{{value}}</custom>',
             noneValue: '無し',
         },

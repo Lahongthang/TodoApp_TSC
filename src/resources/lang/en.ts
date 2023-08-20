@@ -207,6 +207,13 @@ const en = {
                 lastMonth: 'Last month',
                 custom: 'Custom',
             },
+            custom: {
+                title: 'Select time',
+                from: 'From',
+                to: 'To',
+                resetBtn: 'Reset',
+                applyBtn: 'Apply',
+            },
             label: 'Time: <custom>{{value}}</custom>',
             noneValue: 'None',
         },

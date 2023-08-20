@@ -62,7 +62,7 @@ const FilterTime: React.FC = () => {
                     open={openTimeSelection}
                     onClose={() => setOpenTimeSelection(null)}
                     value={time && [time?.id]}
-                    title={'Select time'}
+                    title={t('filterTime.custom.title')}
                     options={FilterOptions(t)}
                     onSelect={handleSelect}
                     multiple={false}
