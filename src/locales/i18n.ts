@@ -6,11 +6,17 @@ import resources from '../resources/lang'
 import { defaultLang } from '../configs/lang'
 import { formatDate } from '../utils/datetime/formatHelper'
 
+let lng = defaultLang.value
+
+if (typeof window !== 'undefined') {
+    lng = localStorage.getItem('i18nextLng') as "vi" | "en" | "ja" || defaultLang.value;
+}
+
 i18n.use(LanguageDetector)
     .use(initReactI18next)
     .init({
         resources,
-        lng: defaultLang.value,
+        lng,
         fallbackLng: defaultLang.value,
         ns: ['translations'],
         defaultNS: 'translations',
