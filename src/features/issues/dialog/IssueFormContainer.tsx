@@ -42,7 +42,12 @@ const IssueFormContainer: React.FC<IssueFormContainerProps> = ({
     const { data: users } = getUsersRes
 
     const convertedUsers = useMemo(() => {
-        return users?.map((user: any) => ({ ...user, label: user.username})) ?? []
+        return users?.map((user: any) => ({
+            id: user.id,
+            username: user.username,
+            avatar: user.avatar,
+            label: user.username,
+        })) ?? []
     }, [users])
 
     const assignee = useMemo(() => {

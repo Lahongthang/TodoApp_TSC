@@ -292,6 +292,15 @@ const en = {
             resetBtn: 'Reset',
             searchPlaceholder: 'Enter keyword here',
         },
+        validations: {
+            title: 'Please enter title',
+            type: 'Please select type',
+            status: 'Please select status',
+            priority: 'Please select priority',
+            assignee: 'Please select assignee',
+            startDate: 'Please enter start date',
+            endDate: 'Please enter end date',
+        },
         notifications: {
             createIssueSuccessed: 'Create issue successfully!',
             createIssueFailed: 'Create issue failed!',

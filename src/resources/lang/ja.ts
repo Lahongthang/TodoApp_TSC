@@ -292,6 +292,15 @@ const ja = {
             resetBtn: 'リセット',
             searchPlaceholder: 'キーワードを入力してください',
         },
+        validations: {
+            title: 'タイトルを入力してください',
+            type: 'タイプを選択してください',
+            status: 'ステータスを選択してください',
+            priority: '優先順位を選択してください',
+            assignee: '譲受人を選択してください',
+            startDate: '開始日を入力してください',
+            endDate: '終了日を入力してください',
+        },
         notifications: {
             createIssueSuccessed: '問題の作成に成功しました!',
             createIssueFailed: '問題の作成に失敗しました!',
