@@ -6,12 +6,13 @@ import { RestProps } from "../../../utils/types";
 type Props = {
     open: boolean,
     label: any,
+    sx?: any,
     onOpen: (e: any) => void,
 }
 
 type FilterButtonProps = Props & RestProps
 
-const FilterButton: React.FC<FilterButtonProps> = ({ open, label, onOpen, ...props }) => {
+const FilterButton: React.FC<FilterButtonProps> = ({ open, label, sx, onOpen, ...props }) => {
     return (
         <Chip
             onClick={onOpen}
@@ -20,6 +21,7 @@ const FilterButton: React.FC<FilterButtonProps> = ({ open, label, onOpen, ...pro
                 sx={{ width: 20, height: 20 }}
                 icon={open ? 'iconamoon:arrow-up-2-duotone' : 'iconamoon:arrow-down-2-duotone'}
             />}
+            sx={{ borderRadius: 3, ...sx }}
             {...props}
         />
     )
