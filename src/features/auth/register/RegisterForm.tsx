@@ -20,7 +20,7 @@ const RegisterForm: React.FC<Props> = ({ t, isHandling }) => {
     const { toggle: showConfirmPass, onToggle: onToggleConfirmPass } = useToggle()
 
     return (
-        <Stack spacing={5}>
+        <Stack spacing={5} sx={{ width: 1 }} justifyContent='center'>
             <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
                 {t('title')}
             </Typography>

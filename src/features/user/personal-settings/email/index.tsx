@@ -48,7 +48,7 @@ const EmailManagement: React.FC = () => {
         const data = getValues()
         const bodyData = { email: data.newEmail }
         try {
-            await dispatch(userApi.endpoints.confirmEmail.initiate(bodyData)).unwrap()
+            await dispatch(userApi.endpoints.confirmChangeEmail.initiate(bodyData)).unwrap()
             setOpenConfirmEmail(true)
         } catch (error) {
             console.error(error)

@@ -107,6 +107,75 @@ const ja = {
             registerFailed: 'アカウントの作成に失敗しました!'
         }
     },
+    resetPassword: {
+        pageTitle: 'パスワードのリセット',
+        steps: {
+            findAccount: {
+                title: 'アカウントの検索',
+                desc: 'アカウントを検索するにはメール アドレスを入力してください。',
+                form: {
+                    email: 'メールアドレス',
+                    submitBtn: {
+                        content: '検索',
+                        loadingIndicator: '検索中...',
+                    },
+                    loginLink: 'ログイン',
+                },
+                validations: {
+                    email: {
+                        required: 'メールアドレスを入力してください',
+                        valid: 'メールは有効な電子メールアドレスである必要があります',
+                    },
+                },
+            },
+            verifyEmail: {
+                title: 'メールアドレスの確認',
+                desc: 'あなたのものであることを知らせてください。<custom>{{email}}</custom>に送信されたメールからコードを入力してください。',
+                form: {
+                    verifyCode: '検証コード',
+                    sendCodeAgain: 'もう一度送信',
+                    changeEmail: 'メールを変更',
+                    submitBtn: {
+                        content: '検証',
+                        loadingIndicator: '検証中...',
+                    },
+                },
+                validations: {
+                    verifyCode: '確認コードを入力してください', 
+                },
+            },
+            changePassword: {
+                title: 'パスワードの変更',
+                desc: '変更するには新しいパスワードを入力してください',
+                form: {
+                    newPassword: '新しいパスワード',
+                    confirmPassword: '新しいパスワードの確認',
+                    submitBtn: {
+                        content: '変化',
+                        loadingIndicator: '変化中...',
+                    },
+                },
+                validations: {
+                    newPassword: {
+                        required: '新しいパスワードを入力してください',
+                        min: 'パスワードは8文字以上でなければなりません',
+                    },
+                    confirmPassword: {
+                        required: '確認パスワードを入力してください',
+                        match: 'パスワードが一致しません',
+                    },
+                },
+                completeCard: {
+                    cardTitle: '完成',
+                    title: 'パスワードを正常にリセットしました!',
+                    actions: {
+                        login: 'ログイン',
+                        createNewAccount: 'アカウント作成',
+                    },
+                }
+            },
+        },
+    },
     personalSettings: {
         pageTitle: '個人設定',
         header: {
