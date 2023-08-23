@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import React, { useState } from "react";
-import { Card, alpha } from '@mui/material'
+import { Card, CardHeader, CardContent, CardActions } from '@mui/material'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useSnackbar } from 'notistack'
@@ -10,6 +10,10 @@ import { showErrors } from "../../../utils/validations/validationHelper";
 import LoginForm from "./LoginForm";
 import { dispatch } from "../../../app/store";
 import { authApi } from "../../../app/services/auth/authApi";
+import { RootStyle } from "./styles";
+import { SubmitButton } from "../../../components/buttons";
+
+const FORM_ID = 'login-form'
 
 const LoginContainer: React.FC = () => {
     const { t } = useTranslation('translations', { keyPrefix: 'login' })
@@ -48,21 +52,31 @@ const LoginContainer: React.FC = () => {
         }
     }
 
-    return <Card sx={{
-            px: 7,
-            height: 1,
-            display: 'flex',
-            borderRadius: 0,
-            backgroundColor: theme => alpha(theme.palette.primary.light, 0.03)
-        }}>
-            <FormProvider
-                methods={methods}
-                onSubmit={handleSubmit(handleLogin)}
-            >
-                <LoginForm t={t} isHandling={isHandling} />
-            </FormProvider>
-        </Card>
-        
+    return (
+        <RootStyle>
+            <Card sx={{ width: 1, p: 3 }}>
+                <CardHeader title={t('title')} />
+                <CardContent>
+                    <FormProvider
+                        id={FORM_ID}
+                        methods={methods}
+                        onSubmit={handleSubmit(handleLogin)}
+                    >
+                        <LoginForm t={t} />
+                    </FormProvider>
+                </CardContent>
+                <CardActions>
+                    <SubmitButton
+                        fullWidth
+                        forForm={FORM_ID}
+                        isLoading={isHandling}
+                        text={t('form.loginBtn.content')}
+                        loadingText={t('form.loginBtn.loadingIndicator')}
+                    />
+                </CardActions>
+            </Card>
+        </RootStyle>
+    )
 }
 
 export default LoginContainer;
