@@ -107,6 +107,75 @@ const en = {
             registerFailed: 'Create account failed!'
         }
     },
+    resetPassword: {
+        pageTitle: 'Reset Password',
+        steps: {
+            findAccount: {
+                title: 'Find your account',
+                desc: 'Please enter your email address to search for your account.',
+                form: {
+                    email: 'Email address',
+                    submitBtn: {
+                        content: 'Search',
+                        loadingIndicator: 'Searching...',
+                    },
+                    loginLink: 'Login',
+                },
+                validations: {
+                    email: {
+                        required: 'Please enter email address',
+                        valid: 'Email must be a valid email address',
+                    },
+                },
+            },
+            verifyEmail: {
+                title: 'Verify email address',
+                desc: 'Let us know that this email address belongs to you. Enter the code from the email sent to <custom>{{email}}</custom>',
+                form: {
+                    verifyCode: 'Verification code',
+                    sendCodeAgain: 'Send code again',
+                    changeEmail: 'Change email',
+                    submitBtn: {
+                        content: 'Verify',
+                        loadingIndicator: 'Verifying...',
+                    },
+                },
+                validations: {
+                    verifyCode: 'Please enter verification code', 
+                },
+            },
+            changePassword: {
+                title: 'Change password',
+                desc: 'Enter your new password to change',
+                form: {
+                    newPassword: 'New password',
+                    confirmPassword: 'Confirm password',
+                    submitBtn: {
+                        content: 'Change',
+                        loadingIndicator: 'Changing...',
+                    },
+                },
+                validations: {
+                    newPassword: {
+                        required: 'Please enter new password',
+                        min: 'Password must be at least 8 characters',
+                    },
+                    confirmPassword: {
+                        required: 'Please enter confimation password',
+                        match: 'Password do not matchs',
+                    },
+                },
+                completeCard: {
+                    cardTitle: 'Completed',
+                    title: 'Reset password successfully!',
+                    actions: {
+                        login: 'Login',
+                        createNewAccount: 'Create new account',
+                    },
+                }
+            },
+        },
+    },
     personalSettings: {
         pageTitle: 'Personal Settings',
         header: {

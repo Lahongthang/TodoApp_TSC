@@ -7,6 +7,7 @@ import AuthGuard from "../guards/AuthGuard";
 import GuestGuard from "../guards/GuestGuard";
 import RegisterPage from "../pages/register";
 import PersonalSettingPage from "../pages/personal-settings";
+import ResetPasswordPage from "../pages/reset-password";
 
 export default function Router() {
     return useRoutes([
@@ -23,6 +24,12 @@ export default function Router() {
             </GuestGuard>
         },
         {
+            path: 'reset-password',
+            element: <GuestGuard redirectTo="/">
+                <ResetPasswordPage />
+            </GuestGuard>
+        },
+        {
             path: '',
             element: <AuthGuard>
                 <ApplicationLayout />
@@ -36,14 +43,6 @@ export default function Router() {
                     path: 'home',
                     element: <IssuesPage />
                 },
-                // {
-                //     path: 'issues-management',
-                //     element: <IssuesPage />,
-                // },
-                // {
-                //     path: 'colors',
-                //     element: <ColorsPage />
-                // },
                 {
                     path: 'personal-settings',
                     element: <PersonalSettingPage />

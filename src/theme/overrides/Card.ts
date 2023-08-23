@@ -23,5 +23,20 @@ export default function Card(theme: Theme) {
                 },
             },
         },
+        MuiCardContent: {
+            styleOverrides: {
+                root: {
+                    padding: theme.spacing(0),
+                },
+            },
+        },
+        MuiCardActions: {
+            styleOverrides: {
+                root: {
+                    padding: theme.spacing(0),
+                    paddingTop: theme.spacing(2),
+                },
+            },
+        },
     }
 }

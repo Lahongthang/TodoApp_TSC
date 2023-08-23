@@ -17,6 +17,7 @@ const FormProvider: React.FC<FormProviderProps> = ({ id, methods, children, onSu
             <form id={id}
                 noValidate
                 onSubmit={onSubmit}
+                style={{ width: '100%' }}
                 {...props}
             >
                 {children}
