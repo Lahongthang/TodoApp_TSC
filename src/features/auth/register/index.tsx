@@ -51,7 +51,7 @@ const RegisterManagement: React.FC = () => {
         const { username, email, password } = data ?? {}
         const bodyData = { username, email, password }
         try {
-            await dispatch(authApi.endpoints.confirmAccount.initiate(bodyData)).unwrap()
+            await dispatch(authApi.endpoints.confirmRegister.initiate(bodyData)).unwrap()
             setOpenConfirmAccount(true)
         } catch (error) {
             showRegisterError(error)
