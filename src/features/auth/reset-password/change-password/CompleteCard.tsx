@@ -18,7 +18,7 @@ const CompleteCard: React.FC<CompleteCardProps> = ({ t }) => {
                     size="small"
                     href="login"
                     startIcon={<Iconify icon="basil:login-solid" />}>
-                    {t('completeCard.actions.login')}
+                    {t('completeCard.actions.signIn')}
                 </Button>
                 <Button
                     size="small"

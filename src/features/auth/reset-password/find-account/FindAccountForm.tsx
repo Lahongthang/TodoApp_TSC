@@ -19,7 +19,7 @@ const FindAccountForm: React.FC<FindAccountFormProps> = ({ t }) => {
                     size="small"
                     href="login"
                     startIcon={<Iconify icon="basil:login-solid" />}>
-                    {t('form.loginLink')}
+                    {t('form.signIn')}
                 </Button>
             </Stack>
         </Stack>

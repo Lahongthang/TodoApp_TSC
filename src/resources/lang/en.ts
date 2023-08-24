@@ -119,7 +119,7 @@ const en = {
                         content: 'Search',
                         loadingIndicator: 'Searching...',
                     },
-                    loginLink: 'Login',
+                    signIn: 'Sign In',
                 },
                 validations: {
                     email: {
@@ -169,7 +169,7 @@ const en = {
                     cardTitle: 'Completed',
                     title: 'Reset password successfully!',
                     actions: {
-                        login: 'Login',
+                        signIn: 'Sign In',
                         createNewAccount: 'Create new account',
                     },
                 }

@@ -119,7 +119,7 @@ const ja = {
                         content: '検索',
                         loadingIndicator: '検索中...',
                     },
-                    loginLink: 'ログイン',
+                    signIn: 'サインイン',
                 },
                 validations: {
                     email: {
@@ -169,7 +169,7 @@ const ja = {
                     cardTitle: '完成',
                     title: 'パスワードを正常にリセットしました!',
                     actions: {
-                        login: 'ログイン',
+                        signIn: 'サインイン',
                         createNewAccount: 'アカウント作成',
                     },
                 }
