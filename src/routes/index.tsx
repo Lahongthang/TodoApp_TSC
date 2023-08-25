@@ -1,13 +1,15 @@
 import { Navigate, useRoutes } from "react-router-dom";
 import ApplicationLayout from "../layouts";
-import ColorsPage from "../pages/colors";
-import IssuesPage from "../pages/issues";
-import LoginPage from "../pages/login";
 import AuthGuard from "../guards/AuthGuard";
 import GuestGuard from "../guards/GuestGuard";
-import RegisterPage from "../pages/register";
-import PersonalSettingPage from "../pages/personal-settings";
-import ResetPasswordPage from "../pages/reset-password";
+import {
+    LoginPage,
+    RegisterPage,
+    ResetPasswordPage,
+    IssuesPage,
+    PersonalSettingPage,
+} from './elements'
+
 
 export default function Router() {
     return useRoutes([
