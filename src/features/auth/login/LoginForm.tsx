@@ -1,11 +1,10 @@
 import { Trans } from 'react-i18next'
 import React from "react";
 import { useNavigate } from 'react-router-dom';
-import { Stack, Box, InputAdornment, IconButton, Link, Typography, Tooltip, Alert } from "@mui/material";
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import { useToggle } from "../../../hooks";
+import { Stack, Box, Typography, Alert } from "@mui/material";
 import { RHFTextField } from "../../../components/hook-form";
+import { LinkButton } from '../../../components/buttons';
+import { RHFPasswordTextField } from '../../../components/customs/text-field';
 
 type Props = {
     t: any,
@@ -18,7 +17,6 @@ const DemoAcc = {
 
 const LoginForm: React.FC<Props> = ({ t }) => {
     const navigate = useNavigate()
-    const { toggle: showPass, onToggle: onToggleShowPass } = useToggle()
 
     return (
         <Stack spacing={3}>
@@ -51,24 +49,15 @@ const LoginForm: React.FC<Props> = ({ t }) => {
                 name="username"
                 label={t('form.username')}
             />
-            <RHFTextField
+            <RHFPasswordTextField
                 name="password"
                 label={t('form.password')}
-                type={showPass ? 'text' : 'password'}
-                InputProps={{
-                    endAdornment: <InputAdornment position="end">
-                        <Tooltip title={t(`form.${showPass ? 'hidePassword' : 'showPassword'}`)} placement='top'>
-                            <IconButton size='small' onClick={onToggleShowPass}>
-                                {showPass ? <VisibilityOffIcon /> : <VisibilityIcon />}
-                            </IconButton>
-                        </Tooltip>
-                    </InputAdornment>
-                }}
             />
             <Stack direction='row'>
-                <Link href="reset-password" variant="body2">
-                    {t('form.forgotPassword')}
-                </Link>
+                <LinkButton
+                    to='/reset-password'
+                    text={t('form.forgotPassword')}
+                />
             </Stack>
         </Stack>
     )
