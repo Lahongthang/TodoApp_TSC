@@ -55,7 +55,17 @@ const FilterAssignee: React.FC = () => {
                     <Stack direction='row' alignItems='center' spacing={1}>
                         <Checkbox size="small" checked={selected} sx={{ p: 0 }} />
                         <Stack spacing={0.5} direction='row' alignItems='center'>
-                            <Avatar src={item.avatar} alt={item.username} sx={{ width: 22, height: 22 }} />
+                            {item.avatar ? (
+                                <Avatar
+                                    src={item.avatar}
+                                    alt={item.username}
+                                    sx={{ width: 22, height: 22 }}
+                                />
+                            ) : (
+                                <Avatar sx={{ width: 22, height: 22 }}>
+                                    {item.username.slice(0, 1)}
+                                </Avatar>
+                            )}
                             <Typography variant="body1">
                                 {item.label}
                             </Typography>
