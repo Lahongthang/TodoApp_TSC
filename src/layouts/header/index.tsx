@@ -3,6 +3,7 @@ import { AppBar, Toolbar, Stack, Box, styled } from '@mui/material'
 import { HEADER } from '../../configs/app'
 import AccountPopover from './AccountPopover'
 import LanguagePopover from './LanguagePopover'
+import { useAuth } from '../../hooks'
 
 const RootStyle = styled(AppBar)(({ theme }) => ({
     boxShadow: 'none',
@@ -16,12 +17,15 @@ const RootStyle = styled(AppBar)(({ theme }) => ({
 }))
 
 const Header: React.FC = () => {
+    const { auth } = useAuth()
+    const { isAuthenticated } = auth ?? {}
+
     return <RootStyle>
         <Toolbar>
             <Box sx={{ flexGrow: 1 }} />
             <Stack direction='row' alignItems='center' spacing={1}>
                 <LanguagePopover />
-                <AccountPopover />
+                {isAuthenticated && <AccountPopover />}
             </Stack>
         </Toolbar>
     </RootStyle>

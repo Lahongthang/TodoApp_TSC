@@ -14,42 +14,44 @@ import {
 export default function Router() {
     return useRoutes([
         {
-            path: 'login',
-            element: <GuestGuard redirectTo="/">
-                <LoginPage />
-            </GuestGuard>
-        },
-        {
-            path: 'register',
-            element: <GuestGuard redirectTo="/">
-                <RegisterPage />
-            </GuestGuard>
-        },
-        {
-            path: 'reset-password',
-            element: <GuestGuard redirectTo="/">
-                <ResetPasswordPage />
-            </GuestGuard>
-        },
-        {
             path: '',
-            element: <AuthGuard>
-                <ApplicationLayout />
-            </AuthGuard>,
+            element: <ApplicationLayout />,
             children: [
                 {
                     path: '',
-                    element: <Navigate to={'home'} />
+                    element: <Navigate to={'home'} />,
                 },
                 {
                     path: 'home',
-                    element: <IssuesPage />
+                    element: <AuthGuard>
+                        <IssuesPage />
+                    </AuthGuard>,
                 },
                 {
                     path: 'personal-settings',
-                    element: <PersonalSettingPage />
+                    element: <AuthGuard>
+                        <PersonalSettingPage />
+                    </AuthGuard>,
                 },
-            ],
-        },
+                {
+                    path: 'login',
+                    element: <GuestGuard redirectTo="/">
+                        <LoginPage />
+                    </GuestGuard>,
+                },
+                {
+                    path: 'register',
+                    element: <GuestGuard redirectTo="/">
+                        <RegisterPage />
+                    </GuestGuard>,
+                },
+                {
+                    path: 'reset-password',
+                    element: <GuestGuard redirectTo="/">
+                        <ResetPasswordPage />
+                    </GuestGuard>,
+                },
+            ]
+        }
     ])
 }

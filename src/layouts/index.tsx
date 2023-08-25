@@ -1,6 +1,6 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom';
-import { Box, Stack } from '@mui/material';
+import { Box } from '@mui/material';
 import Header from './header';
 import { HEADER } from '../configs/app';
 
