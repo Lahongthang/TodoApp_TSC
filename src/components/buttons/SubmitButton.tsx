@@ -3,7 +3,7 @@ import { LoadingButton } from "@mui/lab";
 import { RestProps } from "../../utils/types";
 
 type Props = {
-    forForm: string,
+    forForm?: string,
     size?: 'small' | 'medium' | 'large',
     variant?: 'text' | 'outlined' | 'contained',
     fullWidth?: boolean,

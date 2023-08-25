@@ -35,9 +35,9 @@ export const authApi = apiService.injectEndpoints({
                 }
             },
         }),
-        confirmRegister: builder.mutation({
+        verifyAccount: builder.mutation({
             query: (data) => ({
-                url: 'confirm-register',
+                url: 'verify-account',
                 method: 'POST',
                 data,
             }),
@@ -49,26 +49,5 @@ export const authApi = apiService.injectEndpoints({
                 data,
             }),
         }),
-        confirmResetPassword: builder.mutation({
-            query: (data) => ({
-                url: 'confirm-reset-password',
-                method: 'POST',
-                data,
-            }),
-        }),
-        verifyResetPasswordCode: builder.mutation({
-            query: (data) => ({
-                url: 'verify-reset-password-code',
-                method: 'POST',
-                data
-            }),
-        }),
-        resetPassword: builder.mutation({
-            query: (data) => ({
-                url: 'reset-password',
-                method: 'PUT',
-                data,
-            }),
-        })
     })
 })

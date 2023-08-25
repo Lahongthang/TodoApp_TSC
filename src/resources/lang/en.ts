@@ -55,19 +55,32 @@ const en = {
     },
     register: {
         pageTitle: 'Register',
-        title: 'Create new account',
-        haveAccount: 'Already have an account? <custom>{{action}}</custom>',
-        signIn: 'Sign In',
-        form: {
-            username: 'User name',
-            email: 'Email address',
-            password: 'Password',
-            confirmPassword: 'Confirm password',
-            showPassword: 'Show',
-            hidePassword: 'Hide',
-            registerBtn: {
-                content : 'Create account',
-                loadingIndicator: 'Creating...',
+        createAccount: {
+            title: 'Create new account',
+            haveAccount: 'Already have an account? <custom>{{action}}</custom>',
+            signIn: 'Sign In',
+            form: {
+                username: 'User name',
+                email: 'Email address',
+                password: 'Password',
+                confirmPassword: 'Confirm password',
+                registerBtn: {
+                    content : 'Create account',
+                    loadingIndicator: 'Creating...',
+                },
+            },
+        },
+        verifyEmail: {
+            title: 'Verify email',
+            desc: 'Let us know that this email address belongs to you. Enter the code from the email sent to <custom>{{email}}</custom>',
+            form: {
+                verifyCode: 'Verification code',
+                sendCodeAgain: 'Send code again',
+                changeEmail: 'Change email',
+                submitBtn: {
+                    content: 'Verify',
+                    loadingIndicator: 'Verifying...',
+                },
             },
         },
         completeCard: {
@@ -98,8 +111,9 @@ const en = {
                 required: 'Please enter confimation password',
                 match: 'Password do not matchs',
             },
-            confirmCode: {
+            verifyCode: {
                 required: 'Please enter verification code',
+                valid: 'Verification code must be 6 characters',
             },
         },
         notifications: {
@@ -109,70 +123,67 @@ const en = {
     },
     resetPassword: {
         pageTitle: 'Reset Password',
-        steps: {
-            findAccount: {
-                title: 'Find your account',
-                desc: 'Please enter your email address to search for your account.',
-                form: {
-                    email: 'Email address',
-                    submitBtn: {
-                        content: 'Search',
-                        loadingIndicator: 'Searching...',
-                    },
-                    signIn: 'Sign In',
+        findAccount: {
+            title: 'Find your account',
+            desc: 'Please enter your email address to search for your account.',
+            form: {
+                email: 'Email address',
+                submitBtn: {
+                    content: 'Search',
+                    loadingIndicator: 'Searching...',
                 },
-                validations: {
-                    email: {
-                        required: 'Please enter email address',
-                        valid: 'Email must be a valid email address',
-                    },
+                signIn: 'Sign In',
+            },
+        },
+        verifyEmail: {
+            title: 'Verify email address',
+            desc: 'Let us know that this email address belongs to you. Enter the code from the email sent to <custom>{{email}}</custom>',
+            form: {
+                verifyCode: 'Verification code',
+                sendCodeAgain: 'Send code again',
+                changeEmail: 'Change email',
+                submitBtn: {
+                    content: 'Verify',
+                    loadingIndicator: 'Verifying...',
                 },
             },
-            verifyEmail: {
-                title: 'Verify email address',
-                desc: 'Let us know that this email address belongs to you. Enter the code from the email sent to <custom>{{email}}</custom>',
-                form: {
-                    verifyCode: 'Verification code',
-                    sendCodeAgain: 'Send code again',
-                    changeEmail: 'Change email',
-                    submitBtn: {
-                        content: 'Verify',
-                        loadingIndicator: 'Verifying...',
-                    },
-                },
-                validations: {
-                    verifyCode: 'Please enter verification code', 
+        },
+        changePassword: {
+            title: 'Change password',
+            desc: 'Enter your new password to change',
+            form: {
+                newPassword: 'New password',
+                confirmPassword: 'Confirm password',
+                submitBtn: {
+                    content: 'Change',
+                    loadingIndicator: 'Changing...',
                 },
             },
-            changePassword: {
-                title: 'Change password',
-                desc: 'Enter your new password to change',
-                form: {
-                    newPassword: 'New password',
-                    confirmPassword: 'Confirm password',
-                    submitBtn: {
-                        content: 'Change',
-                        loadingIndicator: 'Changing...',
-                    },
-                },
-                validations: {
-                    newPassword: {
-                        required: 'Please enter new password',
-                        min: 'Password must be at least 8 characters',
-                    },
-                    confirmPassword: {
-                        required: 'Please enter confimation password',
-                        match: 'Password do not matchs',
-                    },
-                },
-                completeCard: {
-                    cardTitle: 'Completed',
-                    title: 'Reset password successfully!',
-                    actions: {
-                        signIn: 'Sign In',
-                        createNewAccount: 'Create new account',
-                    },
-                }
+        },
+        validations: {
+            email: {
+                required: 'Please enter email address',
+                valid: 'Email must be a valid email address',
+            },
+            verifyCode: {
+                required: 'Please enter verification code',
+                valid: 'Verification code must be 6 characters',
+            },
+            newPassword: {
+                required: 'Please enter new password',
+                min: 'Password must be at least 8 characters',
+            },
+            confirmPassword: {
+                required: 'Please enter confimation password',
+                match: 'Password do not matchs',
+            },
+        },
+        completeCard: {
+            cardTitle: 'Completed',
+            title: 'Reset password successfully!',
+            actions: {
+                signIn: 'Sign In',
+                createNewAccount: 'Create new account',
             },
         },
     },

@@ -55,19 +55,32 @@ const ja = {
     },
     register: {
         pageTitle: '登録',
-        title: '新しいアカウントを作成する',
-        haveAccount: 'すでにアカウントをお持ちですか？ <custom>{{action}}</custom>',
-        signIn: 'サインイン',
-        form: {
-            username: 'ユーザー名',
-            email: 'メールアドレス',
-            password: 'パスワード',
-            confirmPassword: 'パスワードの確認',
-            showPassword: '見せる',
-            hidePassword: '隠れる',
-            registerBtn: {
-                content : 'アカウントを作成する',
-                loadingIndicator: '作成中...',
+        createAccount: {
+            title: '新しいアカウントを作成する',
+            haveAccount: 'すでにアカウントをお持ちですか？ <custom>{{action}}</custom>',
+            signIn: 'サインイン',
+            form: {
+                username: 'ユーザー名',
+                email: 'メールアドレス',
+                password: 'パスワード',
+                confirmPassword: 'パスワードの確認',
+                registerBtn: {
+                    content : 'アカウントを作成する',
+                    loadingIndicator: '作成中...',
+                },
+            },
+        },
+        verifyEmail: {
+            title: 'メールアドレスの確認',
+            desc: 'あなたのものであることを知らせてください。<custom>{{email}}</custom>に送信されたメールからコードを入力してください。',
+            form: {
+                verifyCode: '検証コード',
+                sendCodeAgain: 'もう一度送信',
+                changeEmail: 'メールを変更',
+                submitBtn: {
+                    content: '検証',
+                    loadingIndicator: '検証中...',
+                },
             },
         },
         completeCard: {
@@ -98,8 +111,9 @@ const ja = {
                 required: '確認パスワードを入力してください',
                 match: 'パスワードが一致しません',
             },
-            confirmCode: {
+            verifyCode: {
                 required: '確認コードを入力してください',
+                valid: '確認コードは6文字である必要があります',
             },
         },
         notifications: {
@@ -109,70 +123,67 @@ const ja = {
     },
     resetPassword: {
         pageTitle: 'パスワードのリセット',
-        steps: {
-            findAccount: {
-                title: 'アカウントの検索',
-                desc: 'アカウントを検索するにはメール アドレスを入力してください。',
-                form: {
-                    email: 'メールアドレス',
-                    submitBtn: {
-                        content: '検索',
-                        loadingIndicator: '検索中...',
-                    },
-                    signIn: 'サインイン',
+        findAccount: {
+            title: 'アカウントの検索',
+            desc: 'アカウントを検索するにはメール アドレスを入力してください。',
+            form: {
+                email: 'メールアドレス',
+                submitBtn: {
+                    content: '検索',
+                    loadingIndicator: '検索中...',
                 },
-                validations: {
-                    email: {
-                        required: 'メールアドレスを入力してください',
-                        valid: 'メールは有効な電子メールアドレスである必要があります',
-                    },
+                signIn: 'サインイン',
+            },
+        },
+        verifyEmail: {
+            title: 'メールアドレスの確認',
+            desc: 'あなたのものであることを知らせてください。<custom>{{email}}</custom>に送信されたメールからコードを入力してください。',
+            form: {
+                verifyCode: '検証コード',
+                sendCodeAgain: 'もう一度送信',
+                changeEmail: 'メールを変更',
+                submitBtn: {
+                    content: '検証',
+                    loadingIndicator: '検証中...',
                 },
             },
-            verifyEmail: {
-                title: 'メールアドレスの確認',
-                desc: 'あなたのものであることを知らせてください。<custom>{{email}}</custom>に送信されたメールからコードを入力してください。',
-                form: {
-                    verifyCode: '検証コード',
-                    sendCodeAgain: 'もう一度送信',
-                    changeEmail: 'メールを変更',
-                    submitBtn: {
-                        content: '検証',
-                        loadingIndicator: '検証中...',
-                    },
-                },
-                validations: {
-                    verifyCode: '確認コードを入力してください', 
+        },
+        changePassword: {
+            title: 'パスワードの変更',
+            desc: '変更するには新しいパスワードを入力してください',
+            form: {
+                newPassword: '新しいパスワード',
+                confirmPassword: '新しいパスワードの確認',
+                submitBtn: {
+                    content: '変化',
+                    loadingIndicator: '変化中...',
                 },
             },
-            changePassword: {
-                title: 'パスワードの変更',
-                desc: '変更するには新しいパスワードを入力してください',
-                form: {
-                    newPassword: '新しいパスワード',
-                    confirmPassword: '新しいパスワードの確認',
-                    submitBtn: {
-                        content: '変化',
-                        loadingIndicator: '変化中...',
-                    },
-                },
-                validations: {
-                    newPassword: {
-                        required: '新しいパスワードを入力してください',
-                        min: 'パスワードは8文字以上でなければなりません',
-                    },
-                    confirmPassword: {
-                        required: '確認パスワードを入力してください',
-                        match: 'パスワードが一致しません',
-                    },
-                },
-                completeCard: {
-                    cardTitle: '完成',
-                    title: 'パスワードを正常にリセットしました!',
-                    actions: {
-                        signIn: 'サインイン',
-                        createNewAccount: 'アカウント作成',
-                    },
-                }
+        },
+        validations: {
+            email: {
+                required: 'メールアドレスを入力してください',
+                valid: 'メールは有効な電子メールアドレスである必要があります',
+            },
+            verifyCode: {
+                required: '確認コードを入力してください',
+                valid: '確認コードは6文字である必要があります',
+            },
+            newPassword: {
+                required: '新しいパスワードを入力してください',
+                min: 'パスワードは8文字以上でなければなりません',
+            },
+            confirmPassword: {
+                required: '確認パスワードを入力してください',
+                match: 'パスワードが一致しません',
+            },
+        },
+        completeCard: {
+            cardTitle: '完成',
+            title: 'パスワードを正常にリセットしました!',
+            actions: {
+                signIn: 'サインイン',
+                createNewAccount: 'アカウント作成',
             },
         },
     },

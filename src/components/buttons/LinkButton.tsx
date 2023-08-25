@@ -1,25 +1,22 @@
-import { Link } from "@mui/material";
 import React from "react";
+import { Link } from "@mui/material";
+import { Link as RouterLink } from 'react-router-dom'
 import { RestProps } from "../../utils/types";
 
 type Props = {
     text: string,
+    to: string,
     sx?: any,
-    onClick: () => void,
 }
 
 type LinkButtonProps = Props & RestProps
 
-const LinkButton: React.FC<LinkButtonProps> = ({ text, sx, onClick, ...props }) => {
+const LinkButton: React.FC<LinkButtonProps> = ({ text, to, sx, ...props }) => {
     return (
         <Link
-            type="button"
+            to={to}
             variant="body2"
-            component='button'
-            onClick={(e) => {
-                e.preventDefault()
-                onClick()
-            }}
+            component={RouterLink}
             sx={{
                 textDecoration: 'none',
                 '&:hover': { textDecoration: 'underline'},

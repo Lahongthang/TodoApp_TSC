@@ -1,83 +1,77 @@
 import { useTranslation } from "react-i18next";
-import React, { useState } from "react";
-import { useSnackbar } from 'notistack'
+import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider } from "../../../components/hook-form";
-import { RegisterSchema } from "../../../utils/validations/auth/RegisterSchema";
+import useStepper from "../../../hooks/useStepper";
 import { showErrors } from "../../../utils/validations/validationHelper";
+import { RegisterSchema } from "../../../utils/validations/auth/RegisterSchema";
+import CreateAccountStep from "./CreateAccountStep";
+import VerifyEmailStep from "./VerifyEmailStep";
+import CompleteCard from "./CompleteCard";
+import { RootStyle } from "./styles";
 import { dispatch } from "../../../app/store";
 import { authApi } from "../../../app/services/auth/authApi";
-import RegisterCard from "./RegisterCard";
-import CompleteCard from "./CompleteCard";
-import { Box } from "@mui/material";
-import withConfirmEmail from "../../../components/withConfirmEmail";
 
-const FORM_ID = 'register-form'
-
-const RegistrationContainer = withConfirmEmail(RegisterCard)
-
-const RegisterManagement: React.FC = () => {
+const RegisterContainer: React.FC = () => {
     const { t } = useTranslation('translations', { keyPrefix: 'register' })
-    const { enqueueSnackbar } = useSnackbar()
-
-    const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
-    const [isConfirming, setIsConfirming] = useState<boolean>(false)
-    const [openConfirmAccount, setOpenConfirmAccount] = useState<boolean>(false)
-    const [isSuccess, setIsSuccess] = useState<boolean>(false)
+    const { activeStep, goToNextStep, goToPrevStep } = useStepper()
 
     const defaultValues = {
         username: '',
         email: '',
         password: '',
         confirmPassword: '',
-        confirmCode: '',
+        verifyCode: '',
     }
+
     const methods = useForm({
-        resolver: yupResolver(RegisterSchema(t, openConfirmAccount)),
         defaultValues,
         mode: 'onSubmit',
+        resolver: yupResolver(RegisterSchema(t, activeStep))
     })
-    const { handleSubmit, setError, getValues } = methods
 
-    const handleFormSubmit = () => {
-        if (openConfirmAccount) handleRegister()
-        else handleConfirmAccount()
-    }
+    const { handleSubmit, setError, getValues, formState: { isSubmitting } } = methods
 
-    const handleConfirmAccount = async () => {
-        setIsConfirming(true)
-        const data = getValues()
-        const { username, email, password } = data ?? {}
-        const bodyData = { username, email, password }
-        try {
-            await dispatch(authApi.endpoints.confirmRegister.initiate(bodyData)).unwrap()
-            setOpenConfirmAccount(true)
-        } catch (error) {
-            showRegisterError(error)
-        } finally {
-            setIsConfirming(false)
+    const handleFormSubmit = async (data: any) => {
+        switch (activeStep) {
+            case 0:
+                await handleVerifyAccount(data)
+                break
+            case 1:
+                await handleRegister(data)
+                break
+            default:
         }
     }
 
-    const handleRegister = async () => {
-        setIsSubmitting(true)
-        const data = getValues()
+    const handleVerifyAccount = async (data: any) => {
+        const bodyData = {
+            username: data.username,
+            email: data.email,
+            password: data.password,
+        }
+        try {
+            await dispatch(authApi.endpoints.verifyAccount.initiate(bodyData)).unwrap()
+            goToNextStep()
+        } catch (error) {
+            showResError(error)
+            console.error(error)
+        }
+    }
+
+    const handleRegister = async (data: any) => {
         const bodyData = (({confirmPassword, ...rest}) => rest)(data)
         try {
             await dispatch(authApi.endpoints.register.initiate(bodyData)).unwrap()
-            setOpenConfirmAccount(false)
-            setIsSuccess(true)
-            enqueueSnackbar(t('notifications.registerSuccessed'))
+            goToNextStep()
         } catch (error) {
-            enqueueSnackbar(t('notifications.registerFailed'), { variant: 'error' })
-            showRegisterError(error)
-        } finally {
-            setIsSubmitting(false)
+            showResError(error)
+            console.error(error)
         }
     }
 
-    const showRegisterError = (error: any) => {
+    const showResError = (error: any) => {
         const { status } = error
         if (status === 422) {
             showErrors(error.data.error, setError)
@@ -85,26 +79,16 @@ const RegisterManagement: React.FC = () => {
     }
 
     return (
-        <Box sx={{ height: 1 }}>
-            {!isSuccess ? (
-                <FormProvider id={FORM_ID}
-                    methods={methods}
-                    style={{ height: '100%' }}
-                    onSubmit={handleSubmit(handleFormSubmit)}>
-                    <RegistrationContainer t={t}
-                        formId={FORM_ID}
-                        isSubmitting={isSubmitting}
-                        isConfirming={isConfirming}
-                        onCloseConfirm={() => setOpenConfirmAccount(false)}
-                        showConfirm={openConfirmAccount}
-                        onSendMail={handleConfirmAccount}
-                    />
-                </FormProvider>
-            ) : (
-                <CompleteCard t={t} data={getValues()} />
-            )}
-        </Box>
+        <RootStyle>
+            <FormProvider
+                methods={methods}
+                onSubmit={handleSubmit(handleFormSubmit)}>
+                {activeStep === 0 && <CreateAccountStep isHandling={isSubmitting} />}
+                {activeStep === 1 && <VerifyEmailStep isHandling={isSubmitting} onGoToPrevStep={goToPrevStep} />}
+                {activeStep === 2 && <CompleteCard data={getValues()} />}
+            </FormProvider>
+        </RootStyle>
     )
 }
 
-export default RegisterManagement;
+export default RegisterContainer;
