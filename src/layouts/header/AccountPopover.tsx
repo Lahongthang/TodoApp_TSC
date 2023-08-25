@@ -36,7 +36,7 @@ const AccountPopover: React.FC = () => {
         setOpen(null)
         switch (item.name) {
             case 'home':
-                navigate('/')
+                navigate('/home')
                 break
             case 'settings':
                 navigate('/personal-settings')
