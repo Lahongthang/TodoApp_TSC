@@ -28,7 +28,7 @@ const EmptyContent: React.FC<EmptyContentProps> = ({ title, description, img, im
             <Image
                 disabledEffect
                 altt='empty content'
-                src={img ?? '/assets/illustrations/empty_flower.svg'}
+                src={img ?? '/assets/illustrations/empty_dog.svg'}
                 sx={{
                     height: 100,
                     ...imgProps,
