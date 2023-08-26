@@ -13,8 +13,8 @@ import { createMenuItems } from '../../utils/createMenuItem';
 import { translateArray } from '../../utils/array/translateArray';
 
 const menuConfig = [
-    { name: 'home', label: 'Home', icon: 'ic:round-home', sx: { color: 'primary.main' } },
-    { name: 'settings', label: 'Settings', icon: 'mingcute:user-setting-fill', sx: { color: 'primary.main' } },
+    { name: 'home', label: 'Home', icon: 'mingcute:home-3-fill', sx: { color: 'primary.main' } },
+    { name: 'settings', label: 'Settings', icon: 'mdi:cog', sx: { color: 'primary.main' } },
     { name: 'divider' },
     { name: 'logout', label: 'Logout', icon: 'humbleicons:logout', sx: { color: 'error.main' } },
 ]

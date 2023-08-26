@@ -14,7 +14,7 @@ export const createMenuItems = (menuConfig: any, handleItemClick: (item: any) =>
                 }}
                 onClick={() => handleItemClick(item)}
             >
-                <Iconify sx={{ mr: 1 }} icon={item.icon} />
+                <Iconify sx={{ mr: 1, width: 20, height: 20 }} icon={item.icon} />
                 {item.label}
             </MenuItem>
         )

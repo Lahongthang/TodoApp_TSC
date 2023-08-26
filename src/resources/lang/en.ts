@@ -10,6 +10,10 @@ const en = {
             logoutFailed: 'Logout failed!',
         }
     },
+    navbar: {
+        home: 'Home',
+        settings: 'Settings',
+    },
     EmailConfimation: {
         title: 'Confirm email',
         desc: 'Let us know that this email address belongs to you. Enter the code from the email sent to <custom>{{email}}</custom>',

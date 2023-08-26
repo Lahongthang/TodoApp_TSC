@@ -5,7 +5,7 @@ import { RestProps } from "../utils/types";
 type Props = {
     children: ReactNode,
     open: any,
-    onClose: () => void,
+    onClose?: () => void,
 }
 
 type MenuPopoverProps = Props & RestProps

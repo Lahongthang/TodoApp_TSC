@@ -10,6 +10,10 @@ const ja = {
             logoutFailed: 'ログアウトに失敗しました!',
         }
     },
+    navbar: {
+        home: 'ホーム',
+        settings: '設定',
+    },
     EmailConfimation: {
         title: 'メール確認',
         desc: 'あなたのものであることを知らせてください。<custom>{{email}}</custom>に送信されたメールからコードを入力してください。',
