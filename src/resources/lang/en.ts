@@ -401,6 +401,12 @@ const en = {
             deleteIssueFailed: 'Delete issue failed!',
         },
     },
+    page404: {
+        pageTitle: '404 Page not found',
+        error: 'Sorry, page not found!',
+        message: `Sorry, we couldn’t find the page you’re looking for.Perhaps you’ve mistyped the URL? Be sure to check your spelling.`,
+        goToHome: 'Go to Home',
+    },
 }
 
 export default en;

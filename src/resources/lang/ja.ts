@@ -401,6 +401,12 @@ const ja = {
             deleteIssueFailed: '問題の削除に失敗しました!',
         },
     },
+    page404: {
+        pageTitle: '404 ページが見つかりません',
+        error: 'ページはご利用になれません',
+        message: `お探しのページが見つかりませんでした。 URLの入力を間違えたのではないでしょうか？ 必ずスペルを確認してください!`,
+        goToHome: 'ホームへ戻る',
+    },
 }
 
 export default ja;
