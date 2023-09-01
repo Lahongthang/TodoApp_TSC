@@ -1,10 +1,10 @@
-import { useTranslation, Trans } from "react-i18next";
-import React from "react";
+import { useTranslation } from "react-i18next";
+import React, { useMemo } from "react";
 import { MenuItem, Stack, Checkbox, Typography } from '@mui/material'
-import { isEmpty } from "lodash";
 import FilterButtonPopover from "../../../components/filters/buttons/FilterButtonPopover";
 import useFilterParams from "../../../components/filters/useFilterParams";
 import { IssuePriorities } from "../utils";
+import { getFilterLabel } from "./utils";
 
 const FilterPriority: React.FC = () => {
     const { t } = useTranslation('translations', { keyPrefix: 'issues' })
@@ -19,17 +19,9 @@ const FilterPriority: React.FC = () => {
         setParam('priority', null)
     }
 
-    const filteredLabels = IssuePriorities(t)?.filter((p: any) => priority?.includes(p.id))
-        ?.map((p: any) => p.label)
-
-    const suffixLabel = isEmpty(filteredLabels) ? t('filters.noneValue')
-        : filteredLabels?.length > 2 ? `(${filteredLabels.length})`
-        : filteredLabels?.join(', ')
-
-    const label = <Trans
-        defaults={t('filters.priority.label', { value: suffixLabel })}
-        components={{ custom: <span style={{ fontWeight: "bold" }} /> }}
-    />
+    const label = useMemo(() => {
+        return getFilterLabel(t, 'priority', IssuePriorities, priority)
+    }, [t, priority])
 
     return (
         <FilterButtonPopover

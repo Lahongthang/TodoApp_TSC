@@ -1,12 +1,11 @@
-import { useTranslation, Trans } from "react-i18next";
-import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+import React, { useMemo, useState } from "react";
 import { FilterOptions, FilterTimeTypes } from "./constants";
 import FilterPopover from "../buttons/FilterPopover";
 import useFilterParams from "../useFilterParams";
 import FilterButton from "../buttons/FilterButton";
-import { defineFilterTime } from "./utils";
+import { defineFilterTime, getLabel } from "./utils";
 import CustomTimePopover from "./CustomTimePopover";
-import { getShortLabelRangeDate } from "../../../utils/datetime/formatHelper";
 import { useLocales } from "../../../hooks";
 
 const FilterTime: React.FC = () => {
@@ -34,18 +33,9 @@ const FilterTime: React.FC = () => {
         setParam('time', null)
     }
 
-    const filteredOpt = FilterOptions(t).find((opt: any) => opt.value === time?.value)
-    const { fromDate, toDate } = time?.period ?? {}
-    const fPeriod = fromDate && toDate ? getShortLabelRangeDate(fromDate, toDate, currentLang.value) : ''
-
-    const suffixLabel = !time ? t('filterTime.noneValue')
-        : filteredOpt?.value !== FilterTimeTypes.Custom ? filteredOpt?.label
-        : fPeriod
-
-    const label = <Trans
-        defaults={t('filterTime.label', { value: suffixLabel })}
-        components={{ custom: <span style={{ fontWeight: 'bold' }} /> }}
-    />
+    const label = useMemo(() => {
+        return getLabel(t, FilterOptions, time, currentLang.value)
+    }, [t, time, currentLang.value])
 
     return (
         <>

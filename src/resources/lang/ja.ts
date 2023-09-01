@@ -298,7 +298,8 @@ const ja = {
                 resetBtn: 'リセット',
                 applyBtn: '適用する',
             },
-            label: '時間: <custom>{{value}}</custom>',
+            label: '時間',
+            labelWithValue: '時間: <custom>{{value}}</custom>',
             noneValue: '無し',
         },
         actions: {
@@ -368,15 +369,18 @@ const ja = {
         },
         filters: {
             type: {
-                label: 'タイプ: <custom>{{value}}</custom>',
+                label: 'タイプ',
+                labelWithValue: 'タイプ: <custom>{{value}}</custom>',
                 title: 'タイプの選択',
             },
             priority: {
-                label: '優先度: <custom>{{value}}</custom>',
+                label: '優先度',
+                labelWithValue: '優先度: <custom>{{value}}</custom>',
                 title: '優先度の選択',
             },
             assignee: {
-                label: '譲受人: <custom>{{value}}</custom>',
+                label: '譲受人',
+                labelWithValue: '譲受人: <custom>{{value}}</custom>',
                 title: '譲受人の選択',
             },
             noneValue: '無し',

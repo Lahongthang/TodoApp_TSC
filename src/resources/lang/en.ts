@@ -26,7 +26,7 @@ const en = {
     },
     login: {
         pageTitle: 'Sign In',
-        title: 'Sign In',
+        title: 'Sign in',
         noAccount: 'New user? <custom>{{action}}</custom>',
         createAccount: 'Create an account',
         form: {
@@ -298,7 +298,8 @@ const en = {
                 resetBtn: 'Reset',
                 applyBtn: 'Apply',
             },
-            label: 'Time: <custom>{{value}}</custom>',
+            label: 'Time',
+            labelWithValue: 'Time: <custom>{{value}}</custom>',
             noneValue: 'None',
         },
         actions: {
@@ -368,15 +369,18 @@ const en = {
         },
         filters: {
             type: {
-                label: 'Type: <custom>{{value}}</custom>',
+                label: 'Type',
+                labelWithValue: 'Type: <custom>{{value}}</custom>',
                 title: 'Select type',
             },
             priority: {
-                label: 'Priority: <custom>{{value}}</custom>',
+                label: 'Priority',
+                labelWithValue: 'Priority: <custom>{{value}}</custom>',
                 title: 'Select priority',
             },
             assignee: {
-                label: 'Assignee: <custom>{{value}}</custom>',
+                label: 'Assignee',
+                labelWithValue: 'Assignee: <custom>{{value}}</custom>',
                 title: 'Select user',
             },
             noneValue: 'None',

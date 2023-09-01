@@ -1,5 +1,7 @@
+import { Trans } from 'react-i18next'
 import { startOfDay, startOfWeek, startOfMonth, subWeeks, subMonths, addDays, endOfWeek, endOfMonth } from 'date-fns'
 import { FilterTimeTypes } from "./constants";
+import { getShortLabelRangeDate } from '../../../utils/datetime/formatHelper';
 
 export const defineFilterTime = (value: any) => {
     const cur = new Date()
@@ -38,4 +40,22 @@ export const defineFilterTime = (value: any) => {
             }
         default: return null
     }
+}
+
+export const getLabel = (t: any, filterOptions: any, time: any, currLang: any) => {
+    if (!time) return t('filterTime.label')
+
+    const filteredOpt = filterOptions(t).find((opt: any) => opt.value === time?.value)
+
+    const { fromDate, toDate } = time?.period ?? {}
+    const fPeriod = fromDate && toDate ? getShortLabelRangeDate(fromDate, toDate, currLang) : ''
+
+    const suffixLabel = filteredOpt?.value !== FilterTimeTypes.Custom ? filteredOpt?.label : fPeriod
+
+    const label = <Trans
+        defaults={t('filterTime.labelWithValue', { value: suffixLabel })}
+        components={{ custom: <span style={{ fontWeight: 'bold' }} /> }}
+    />
+
+    return label
 }

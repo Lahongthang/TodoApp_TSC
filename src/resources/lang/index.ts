@@ -1,11 +1,11 @@
 import en from "./en";
 import ja from "./ja";
-import vn from "./vn";
+import vi from "./vi";
 
 const resources = {
     'en': {'translations': en},
     'ja': {'translations': ja},
-    'vn': {'translations': vn},
+    'vi': {'translations': vi},
 }
 
 export default resources;

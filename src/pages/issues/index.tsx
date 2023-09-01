@@ -8,7 +8,7 @@ import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs'
 const IssuesPage: React.FC = () => {
     const { t } = useTranslation('translations', { keyPrefix: 'issues' })
     return <Page title={t('pageTitle')}>
-        <Container maxWidth='lg'>
+        <Container maxWidth='xl'>
             <HeaderBreadcrumbs
                 heading={t('header.heading')}
             />

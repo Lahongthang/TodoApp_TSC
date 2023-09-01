@@ -1,12 +1,12 @@
-import { useTranslation, Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import React, { useMemo } from "react";
 import { MenuItem, Stack, Checkbox, Typography, Avatar } from '@mui/material'
-import { isEmpty } from "lodash";
 import FilterButtonPopover from "../../../components/filters/buttons/FilterButtonPopover";
 import useFilterParams from "../../../components/filters/useFilterParams";
 import { User } from "../../../utils/types/issue";
 import { useGetAllUserQuery } from "../../../app/services/user/userApi";
 import { specifyState } from "../../../components/StateManager";
+import { getFilterLabel } from "./utils";
 
 const FilterAssignee: React.FC = () => {
     const { t } = useTranslation('translations', { keyPrefix: 'issues' })
@@ -29,17 +29,9 @@ const FilterAssignee: React.FC = () => {
         setParam('assignee', null)
     }
 
-    const filteredLabels = convertedUsers?.filter((user: any) => assignee?.includes(user.id))
-        ?.map((user: any) => user.label)
-
-    const suffixLabel = isEmpty(filteredLabels) ? t('filters.noneValue')
-        : filteredLabels?.length > 2 ? `(${filteredLabels.length})`
-        : filteredLabels?.join(', ')
-
-    const label = <Trans
-        defaults={t('filters.assignee.label', { value: suffixLabel })}
-        components={{ custom: <span style={{ fontWeight: "bold" }} /> }}
-    />
+    const label = useMemo(() => {
+        return getFilterLabel(t, 'assignee', convertedUsers, assignee)
+    }, [t, assignee, convertedUsers])
 
     return (
         <FilterButtonPopover

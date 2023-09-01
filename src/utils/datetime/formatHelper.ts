@@ -58,7 +58,8 @@ const FORMAT_TYPE = {
 
 const LANGUAGES = {
 	en: 'en',
-	ja: 'ja'
+	ja: 'ja',
+	vi: 'vi',
 }
 
 export function formatDateRange(startDate: Date, endDate: Date, language = LANGUAGES.ja as 'en' | 'vi' | 'ja',
@@ -75,6 +76,10 @@ export function formatDateRange(startDate: Date, endDate: Date, language = LANGU
 			toDateFormat = formatType === FORMAT_TYPE.diffMonth ? 'MM/dd' : 'dd'
 			break;
 		case LANGUAGES.en:
+			fromDateFormat = formatType === FORMAT_TYPE.diffMonth ? 'dd/MM' : 'dd'
+			toDateFormat = 'dd/MM/y'
+			break;
+		case LANGUAGES.vi:
 			fromDateFormat = formatType === FORMAT_TYPE.diffMonth ? 'dd/MM' : 'dd'
 			toDateFormat = 'dd/MM/y'
 			break;
