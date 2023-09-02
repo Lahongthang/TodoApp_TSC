@@ -21,7 +21,11 @@ const FilterButton: React.FC<FilterButtonProps> = ({ open, label, sx, onOpen, ..
                 sx={{ width: 20, height: 20 }}
                 icon={open ? 'iconamoon:arrow-up-2-duotone' : 'iconamoon:arrow-down-2-duotone'}
             />}
-            sx={{ borderRadius: 3, ...sx }}
+            sx={{
+                borderRadius: 3,
+                '& .MuiChip-label': { pl: 1 },
+                ...sx
+            }}
             {...props}
         />
     )

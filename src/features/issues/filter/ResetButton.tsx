@@ -14,7 +14,10 @@ const ResetButton: React.FC = () => {
                 {t('filters.resetBtn')}
             </Typography>}
             onClick={reset}
-            sx={{ borderRadius: 3 }}
+            sx={{
+                borderRadius: 3,
+                '& .MuiChip-label': { pl: 1 },
+            }}
             color="warning"
             icon={<Iconify icon="bx:reset" sx={{ width: 20, height: 20 }} />}
         />
